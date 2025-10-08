@@ -17,11 +17,34 @@ module.exports = {
       },
     },
     extend: {
-      // ADICIONE A SEÇÃO ABAIXO
       backgroundImage: {
         'gradient-primary': 'var(--gradient-primary)',
       },
-	  
+      // ADICIONE ESTAS NOVAS SEÇÕES
+      backgroundSize: {
+        '200%': '200% auto',
+        '400%': '400% auto', // Adicionar um tamanho maior
+      },
+      keyframes: {
+        gradient: {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+        },
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        gradient: 'gradient 6s linear infinite', // Deixar a animação mais lenta e linear
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      // FIM DAS NOVAS SEÇÕES
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -62,22 +85,9 @@ module.exports = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
-      },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-      },
     },
   },
   plugins: [require("tailwindcss-animate")],
 }
+
 

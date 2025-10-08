@@ -1,6 +1,6 @@
 import { Footer } from "@/components/layout/Footer";
 import { Navigation } from "@/components/layout/Navigation";
-import { Features } from "@/features/landing/components/Features";
+import { Features } from "@/features/landing/components/Funcionalidades";
 import { Hero } from "@/features/landing/components/Hero";
 import { HowToStart } from "@/features/landing/components/HowToStart";
 
