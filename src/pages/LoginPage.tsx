@@ -1,15 +1,15 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { AuthForm } from "@/components/common";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const handleLogin = (email: string, password: string) => {
+    console.log('Login:', { email, password });
+  };
+
+  const handleRegister = (name: string, email: string, password: string) => {
+    console.log('Register:', { name, email, password });
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20 flex items-center justify-center p-4">
@@ -31,85 +31,18 @@ const LoginPage = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Tabs defaultValue="login" className="w-full">
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="login">Entrar</TabsTrigger>
-                <TabsTrigger value="register">Cadastrar</TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="login" className="space-y-4 mt-6">
-                <div className="space-y-2">
-                  <Label htmlFor="email">E-mail</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="seu@email.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="password">Senha</Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder="••••••••"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
-                <Button className="w-full">
-                  Entrar
-                </Button>
-                <div className="text-center">
-                  <Link to="#" className="text-sm text-muted-foreground hover:text-primary">
-                    Esqueceu sua senha?
-                  </Link>
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="register" className="space-y-4 mt-6">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Nome completo</Label>
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder="Seu nome"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email-register">E-mail</Label>
-                  <Input
-                    id="email-register"
-                    type="email"
-                    placeholder="seu@email.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="password-register">Senha</Label>
-                  <Input
-                    id="password-register"
-                    type="password"
-                    placeholder="••••••••"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
-                <Button className="w-full">
-                  Criar conta
-                </Button>
-                <p className="text-xs text-center text-muted-foreground">
-                  Ao criar uma conta, você concorda com nossos{" "}
-                  <Link to="#" className="underline hover:text-primary">
-                    Termos de Uso
-                  </Link>
-                </p>
-              </TabsContent>
-            </Tabs>
+            <AuthForm onLogin={handleLogin} onRegister={handleRegister} />
+            <div className="text-center mt-4">
+              <Link to="#" className="text-sm text-muted-foreground hover:text-primary">
+                Esqueceu sua senha?
+              </Link>
+            </div>
+            <p className="text-xs text-center text-muted-foreground mt-4">
+              Ao criar uma conta, você concorda com nossos{" "}
+              <Link to="#" className="underline hover:text-primary">
+                Termos de Uso
+              </Link>
+            </p>
           </CardContent>
         </Card>
 

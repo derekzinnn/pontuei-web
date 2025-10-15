@@ -1,41 +1,9 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { ShoppingBag, Gift, Smartphone, MapPin, CreditCard, TrendingUp } from "lucide-react";
-import { AnimatedSection } from "@/components/ui/AnimatedSection"; 
-
-const features = [
-  {
-    icon: ShoppingBag,
-    title: "Compre e Pontue",
-    description: "Acumule pontos a cada compra realizada nas lojas parceiras do Pontuei.",
-  },
-  {
-    icon: Gift,
-    title: "Troque por Prêmios",
-    description: "Use seus pontos para ganhar descontos, produtos e experiências exclusivas.",
-  },
-  {
-    icon: Smartphone,
-    title: "App Intuitivo",
-    description: "Interface moderna e fácil de usar, disponível para iOS e Android.",
-  },
-  {
-    icon: MapPin,
-    title: "Lojas Próximas",
-    description: "Encontre facilmente as lojas parceiras mais próximas de você.",
-  },
-  {
-    icon: CreditCard,
-    title: "Pagamento Seguro",
-    description: "Sistema de pagamento integrado com máxima segurança para suas transações.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Acompanhe o Progresso",
-    description: "Veja seu histórico de pontos e acompanhe suas economias em tempo real.",
-  },
-];
+import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { FeatureCard } from "@/components/landing";
+import { useLandingData } from "@/hooks/useLandingData";
 
 export const Features = () => {
+  const { features } = useLandingData();
   return (
     <section id="funcionalidades" className="py-24 bg-secondary/50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -56,23 +24,13 @@ export const Features = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <AnimatedSection key={index} delay={index * 0.1}>
-              <Card 
-                className="group hover:shadow-glow transition-all duration-300 border-border/50 bg-card/80 backdrop-blur-sm hover:-translate-y-2 h-full"
-              >
-                <CardContent className="p-8 text-center">
-                  <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-primary flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <feature.icon className="w-8 h-8 text-primary-foreground" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-3">
-                    {feature.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {feature.description}
-                  </p>
-                </CardContent>
-              </Card>
-            </AnimatedSection>
+            <FeatureCard
+              key={index}
+              icon={feature.icon}
+              title={feature.title}
+              description={feature.description}
+              delay={index * 0.1}
+            />
           ))}
         </div>
       </div>

@@ -20,15 +20,50 @@ module.exports = {
       backgroundImage: {
         'gradient-primary': 'var(--gradient-primary)',
       },
-      // ADICIONE ESTAS NOVAS SEÇÕES
       backgroundSize: {
         '200%': '200% auto',
-        '400%': '400% auto', // Adicionar um tamanho maior
+        '400%': '400% auto',
+      },
+      boxShadow: {
+        'elegant': 'var(--shadow-card)',
+        'glow': 'var(--shadow-glow)',
       },
       keyframes: {
         gradient: {
           '0%, 100%': { backgroundPosition: '0% 50%' },
           '50%': { backgroundPosition: '100% 50%' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-20px)' },
+        },
+        'float-slow': {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        'pulse-glow': {
+          '0%, 100%': { opacity: '0.3' },
+          '50%': { opacity: '0.6' },
+        },
+        'rotate-gradient': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+        'grid-flow': {
+          '0%': { transform: 'translateX(0) translateY(0)' },
+          '100%': { transform: 'translateX(80px) translateY(80px)' },
+        },
+        'bounce-slow': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-5px)' },
+        },
+        'spin-slow': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+        'glow-pulse': {
+          '0%, 100%': { boxShadow: '0 0 20px rgba(233, 64, 87, 0.3)' },
+          '50%': { boxShadow: '0 0 40px rgba(233, 64, 87, 0.6)' },
         },
         "accordion-down": {
           from: { height: "0" },
@@ -40,11 +75,18 @@ module.exports = {
         },
       },
       animation: {
-        gradient: 'gradient 6s linear infinite', // Deixar a animação mais lenta e linear
+        gradient: 'gradient 6s linear infinite',
+        float: 'float 6s ease-in-out infinite',
+        'float-slow': 'float-slow 8s ease-in-out infinite',
+        'pulse-glow': 'pulse-glow 4s ease-in-out infinite',
+        'rotate-gradient': 'rotate-gradient 20s linear infinite',
+        'grid-flow': 'grid-flow 20s linear infinite',
+        'bounce-slow': 'bounce-slow 2s ease-in-out infinite',
+        'spin-slow': 'spin-slow 8s linear infinite',
+        'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
-      // FIM DAS NOVAS SEÇÕES
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -55,6 +97,9 @@ module.exports = {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
         },
+        'pink-light': 'hsl(351, 100%, 95%)',
+        'pink-glow': 'hsl(351, 100%, 70%)',
+        'pink-dark': 'hsl(351, 83%, 45%)',
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",

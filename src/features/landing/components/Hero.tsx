@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { LandingNavigation } from "@/components/landing/LandingNavigation";
 
 export function Hero() {
   const containerVariants = {
@@ -19,28 +19,76 @@ export function Hero() {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-accent/30 to-background overflow-hidden">
-      {/* Elementos de Fundo */}
-      <div className="absolute inset-0 overflow-hidden -z-10">
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-primary rounded-full opacity-10 blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-gradient-primary rounded-full opacity-10 blur-3xl animate-pulse delay-1000"></div>
+    <section id="home" className="relative min-h-screen bg-gradient-to-br from-pink-light via-background to-pink-light overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div 
+          className="absolute top-20 -left-20 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-primary/30 via-pink-glow/20 to-transparent blur-3xl animate-float"
+        />
+        <motion.div 
+          className="absolute top-40 right-0 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-pink-glow/25 via-primary/20 to-transparent blur-3xl animate-float-slow"
+        />
+        <motion.div 
+          className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-gradient-to-br from-primary/20 via-pink-light/30 to-transparent blur-3xl animate-pulse-glow"
+        />
+        
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px]">
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/30 via-pink-glow/30 to-primary/30 blur-3xl animate-rotate-gradient" />
+        </div>
+
+        <div className="absolute inset-0 opacity-[0.04]">
+          <div 
+            className="absolute inset-0 animate-grid-flow"
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, hsl(var(--primary)) 1px, transparent 1px),
+                linear-gradient(to bottom, hsl(var(--primary)) 1px, transparent 1px)
+              `,
+              backgroundSize: '80px 80px',
+            }}
+          />
+        </div>
+
+        {[...Array(30)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-primary/40 rounded-full pointer-events-none"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -100, 0],
+              x: [0, Math.random() * 50 - 25, 0],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 3,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <LandingNavigation />
+
+      <div className="relative z-10 flex items-center justify-center min-h-screen px-6 pt-20">
+        <div className="max-w-6xl mx-auto text-center">
         <motion.div
           className="text-center space-y-6"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {/* Título Principal */}
           <motion.div variants={itemVariants}>
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground leading-tight tracking-tighter">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E94057] to-white-500 bg-200% animate-gradient">
             Pontuei.
               </span> Seu novo{" "}
               <span className="text-primary">
-                aplicativo de pontos
+                aplicativo <br/>de pontos
               </span>{" "}
               chegou.
             </h1>
@@ -52,18 +100,12 @@ export function Hero() {
             </p>
           </motion.div>
 
-          {/* Botões de Ação */}
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
             <Button size="lg" className="group">
-              BAIXE O APP AGORA
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button size="lg" variant="outline">
-              Ver Demonstração
+              Baixe o App Agora
             </Button>
           </motion.div>
 
-          {/* Estatísticas */}
           <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-12 max-w-2xl mx-auto">
             <div className="text-center">
               <div className="text-3xl font-bold text-primary">10.000+</div>
@@ -79,6 +121,7 @@ export function Hero() {
             </div>
           </motion.div>
         </motion.div>
+        </div>
       </div>
     </section>
   );

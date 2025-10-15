@@ -7,6 +7,8 @@ import IndexPage from "@/pages/IndexPage";
 import LoginPage from "@/pages/LoginPage";
 import DashboardPage from "@/pages/DashboardPage";
 import AdminStorePage from "@/pages/AdminStorePage";
+import StoreRegisterPage from "@/pages/StoreRegisterPage";
+import StoreDashboardPage from "@/pages/StoreDashboardPage";
 import NotFoundPage from "@/pages/NotFoundPage";
 
 const queryClient = new QueryClient();
@@ -21,6 +23,8 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/admin-store" element={<AdminStorePage />} />
+            <Route path="/store-register" element={<StoreRegisterPage />} />
+            <Route path="/store-dashboard" element={<StoreDashboardPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>

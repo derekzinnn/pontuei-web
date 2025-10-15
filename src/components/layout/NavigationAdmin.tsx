@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 export function Header() {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
 
-  // Efeito para "escutar" a rolagem da página e aplicar o estilo de fundo
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);

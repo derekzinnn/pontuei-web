@@ -1,18 +1,19 @@
+import { PageLayout } from "@/components/common";
 import { Footer } from "@/components/layout/Footer";
-import { Navigation } from "@/components/layout/Navigation";
 import { Features } from "@/features/landing/components/Funcionalidades";
 import { Hero } from "@/features/landing/components/Hero";
 import { HowToStart } from "@/features/landing/components/HowToStart";
+import { TestimonialsCarousel } from "@/components/landing";
 
 const IndexPage = () => {
   return (
-    <div className="min-h-screen">
-      <Navigation />
+    <PageLayout showHeader={false} className="min-h-screen">
       <Hero />
       <HowToStart />
       <Features />
+      <TestimonialsCarousel />
       <Footer />
-    </div>
+    </PageLayout>
   );
 };
 

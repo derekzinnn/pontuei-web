@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
-// Array com os links de navegação para facilitar a manutenção
 const navLinks = [
   { href: "#home", label: "Home" },
   { href: "#como-comecar", label: "Como Começar" },
@@ -13,12 +12,10 @@ export function Navigation() {
   const [activeLink, setActiveLink] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Efeito para "escutar" a rolagem da página
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
 
-      // Define "home" como ativo quando o usuário está no topo
       if (window.scrollY < 100) {
         setActiveLink("home");
         return;
@@ -53,7 +50,6 @@ export function Navigation() {
             <a
               key={link.label}
               href={link.href}
-              // A rolagem suave padrão do CSS (ativada no index.css) cuidará da animação
               className={`text-sm font-medium transition-colors hover:text-primary ${
                 (activeLink === link.href.substring(1))
                   ? "text-primary"
@@ -67,11 +63,10 @@ export function Navigation() {
 
         <div className="hidden md:flex items-center gap-4">
           <Link to="/login">
-            <Button variant="ghost">Login</Button>
+            <Button>Login</Button>
           </Link>
-          {/* Botão "Para Lojistas" agora leva para a página admin-store */}
           <Link to="/admin-store">
-            <Button>Para Lojistas</Button>
+            <Button variant="ghost">Associe-se</Button>
           </Link>
         </div>
       </div>

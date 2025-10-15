@@ -1,31 +1,11 @@
 import { Badge } from "@/components/ui/badge";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useScroll, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-
-const steps = [
-  {
-    step: "01",
-    title: "Baixe o App",
-    description: "Faça o download gratuito do Pontuei na App Store ou Google Play e crie sua conta em segundos.",
-  },
-  {
-    step: "02",
-    title: "Encontre Lojas",
-    description: "Use nosso mapa para localizar lojas parceiras próximas a você ou navegue por categorias.",
-  },
-  {
-    step: "03",
-    title: "Compre e Pontue",
-    description: "Realize suas compras normalmente e apresente seu QR Code para acumular pontos automaticamente.",
-  },
-  {
-    step: "04",
-    title: "Troque por Prêmios",
-    description: "Use seus pontos para conseguir descontos, produtos gratuitos ou experiências exclusivas.",
-  },
-];
+import { StepCard } from "@/components/landing";
+import { useLandingData } from "@/hooks/useLandingData";
 
 export const HowToStart = () => {
+  const { steps } = useLandingData();
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -62,34 +42,15 @@ export const HowToStart = () => {
             <div className="relative flex w-full max-w-5xl items-center justify-between">
               
               <div className="w-1/2 space-y-4">
-                {steps.map((step, index) => {
-                  const isActive = index === currentStep;
-                  return (
-                    <motion.div
-                      key={step.step}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: isActive ? 1 : 0.3, x: isActive ? 0 : -20 }}
-                      transition={{ duration: 0.5 }}
-                      className={`p-6 rounded-lg ${isActive ? 'bg-card/80 shadow-glow' : 'bg-transparent'}`}
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-500 ${isActive ? 'bg-gradient-primary' : 'bg-muted'}`}>
-                          <span className={`text-xl font-bold transition-colors duration-500 ${isActive ? 'text-primary-foreground' : 'text-muted-foreground'}`}>
-                            {step.step}
-                          </span>
-                        </div>
-                        <div>
-                          <h3 className="text-2xl font-semibold text-foreground">
-                            {step.title}
-                          </h3>
-                          <p className="text-muted-foreground leading-relaxed mt-1">
-                            {step.description}
-                          </p>
-                        </div>
-                      </div>
-                    </motion.div>
-                  );
-                })}
+                {steps.map((step, index) => (
+                  <StepCard
+                    key={step.step}
+                    step={step.step}
+                    title={step.title}
+                    description={step.description}
+                    isActive={index === currentStep}
+                  />
+                ))}
               </div>
 
               <div className="w-1/3 h-[60vh] rounded-2xl bg-muted flex items-center justify-center">
