@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { 
   Home,
   Store, 
@@ -8,12 +9,13 @@ import {
   DollarSign,
   Palette,
   Sparkles,
-  ShoppingCart
+  ShoppingCart,
+  CheckCircle
 } from "lucide-react";
 
 const menuItems = [
   { icon: Home, title: "Dashboard", route: "/store-dashboard" },
-  { icon: Store, title: "Cadastro Completo", route: "/store-register" },
+  { icon: CheckCircle, title: "Concluir Cadastro", route: "/store/complete-setup" },
   { icon: Palette, title: "Personalizar Página", route: "/store/customize" },
   { icon: Package, title: "Configurar Produtos", route: "/store/products" },
   { icon: ShoppingCart, title: "Pedidos", route: "/store/orders" },
@@ -23,6 +25,18 @@ const menuItems = [
 
 export function StoreSidebar() {
   const location = useLocation();
+  const [isRegistrationComplete, setIsRegistrationComplete] = useState(false);
+
+  // Verifica se o cadastro foi completado
+  useEffect(() => {
+    const registrationStatus = localStorage.getItem('storeRegistrationComplete');
+    setIsRegistrationComplete(registrationStatus === 'true');
+  }, [location.pathname]);
+
+  // Filtra os itens do menu baseado no status do cadastro
+  const filteredMenuItems = isRegistrationComplete 
+    ? menuItems.filter(item => item.title !== "CONCLUIR CADASTRO")
+    : menuItems;
   
   return (
     <motion.div 
@@ -47,7 +61,7 @@ export function StoreSidebar() {
 
         {/* Menu Items */}
         <nav className="space-y-2">
-          {menuItems.map((item, index) => (
+          {filteredMenuItems.map((item, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, x: -20 }}

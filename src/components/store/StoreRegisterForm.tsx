@@ -47,6 +47,8 @@ export function StoreRegisterForm() {
 
   const handleSubmit = () => {
     console.log('Complete registration:', formData);
+    // Marca o cadastro como completo
+    localStorage.setItem('storeRegistrationComplete', 'true');
   };
 
   const totalSteps = 4;

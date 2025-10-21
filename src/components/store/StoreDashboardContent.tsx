@@ -1,14 +1,10 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Progress } from "@/components/ui/progress";
 import { 
   Settings, 
   Users, 
-  CheckCircle, 
-  AlertCircle,
   TrendingUp,
   Eye,
   Plus,
@@ -115,51 +111,6 @@ export function StoreDashboardContent() {
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
-          {/* Setup Progress */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <Card className="border-0 shadow-elegant">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-500" />
-                  Configuração da Loja
-                </CardTitle>
-                <CardDescription>Complete todos os passos para ativar sua loja</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">Progresso geral</span>
-                    <span className="text-sm text-muted-foreground">{completedTasks}/{totalTasks} concluídos</span>
-                  </div>
-                  <Progress value={progressPercentage} className="h-3" />
-                  
-                  <div className="space-y-3 mt-6">
-                    {setupTasks.map((task) => (
-                      <div key={task.id} className="flex items-center gap-3 p-3 rounded-lg bg-secondary/20">
-                        {task.completed ? (
-                          <CheckCircle className="w-5 h-5 text-green-500" />
-                        ) : (
-                          <AlertCircle className="w-5 h-5 text-orange-500" />
-                        )}
-                        <div className="flex-1">
-                          <h4 className="font-medium">{task.title}</h4>
-                          <p className="text-sm text-muted-foreground">{task.description}</p>
-                        </div>
-                        {!task.completed && (
-                          <Button size="sm" variant="outline">Configurar</Button>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-
           {/* Quick Actions */}
           <Card>
             <CardHeader>

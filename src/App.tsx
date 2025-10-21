@@ -14,6 +14,7 @@ import StoreProductsPage from "@/pages/StoreProductsPage";
 import StoreMembersPage from "@/pages/StoreMembersPage";
 import StoreFinancialPage from "@/pages/StoreFinancialPage";
 import StoreOrdersPage from "@/pages/StoreOrdersPage";
+import StoreCompleteSetupPage from "@/pages/StoreCompleteSetupPage";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +48,9 @@ function App() {
             </Route>
             <Route path="/store/orders" element={<StoreLayout />}>
               <Route index element={<StoreOrdersPage />} />
+            </Route>
+            <Route path="/store/complete-setup" element={<StoreLayout />}>
+              <Route index element={<StoreCompleteSetupPage />} />
             </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
