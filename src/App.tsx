@@ -7,9 +7,13 @@ import IndexPage from "@/pages/IndexPage";
 import LoginPage from "@/pages/LoginPage";
 import DashboardPage from "@/pages/DashboardPage";
 import AdminStorePage from "@/pages/AdminStorePage";
-import StoreRegisterPage from "@/pages/StoreRegisterPage";
-import StoreDashboardPage from "@/pages/StoreDashboardPage";
 import NotFoundPage from "@/pages/NotFoundPage";
+import { StoreLayout, StoreRegisterForm, StoreDashboardContent } from "@/components/store";
+import StoreCustomizePage from "@/pages/StoreCustomizePage";
+import StoreProductsPage from "@/pages/StoreProductsPage";
+import StoreMembersPage from "@/pages/StoreMembersPage";
+import StoreFinancialPage from "@/pages/StoreFinancialPage";
+import StoreOrdersPage from "@/pages/StoreOrdersPage";
 
 const queryClient = new QueryClient();
 
@@ -23,8 +27,27 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/admin-store" element={<AdminStorePage />} />
-            <Route path="/store-register" element={<StoreRegisterPage />} />
-            <Route path="/store-dashboard" element={<StoreDashboardPage />} />
+            <Route path="/store-dashboard" element={<StoreLayout />}>
+              <Route index element={<StoreDashboardContent />} />
+            </Route>
+            <Route path="/store-register" element={<StoreLayout />}>
+              <Route index element={<StoreRegisterForm />} />
+            </Route>
+            <Route path="/store/customize" element={<StoreLayout />}>
+              <Route index element={<StoreCustomizePage />} />
+            </Route>
+            <Route path="/store/products" element={<StoreLayout />}>
+              <Route index element={<StoreProductsPage />} />
+            </Route>
+            <Route path="/store/members" element={<StoreLayout />}>
+              <Route index element={<StoreMembersPage />} />
+            </Route>
+            <Route path="/store/financial" element={<StoreLayout />}>
+              <Route index element={<StoreFinancialPage />} />
+            </Route>
+            <Route path="/store/orders" element={<StoreLayout />}>
+              <Route index element={<StoreOrdersPage />} />
+            </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>

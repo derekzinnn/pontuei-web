@@ -1,30 +1,29 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { 
   Home,
   Store, 
   Package, 
-  Menu, 
-  Settings, 
   Users, 
   DollarSign,
-  FileText,
   Palette,
-  Sparkles
+  Sparkles,
+  ShoppingCart
 } from "lucide-react";
 
 const menuItems = [
-  { icon: Home, title: "Dashboard", route: "/store-dashboard", active: true },
-  { icon: FileText, title: "Informações Básicas", route: "/store/basic-info" },
-  { icon: Store, title: "Cadastro Completo", route: "/store/complete-registration" },
+  { icon: Home, title: "Dashboard", route: "/store-dashboard" },
+  { icon: Store, title: "Cadastro Completo", route: "/store-register" },
   { icon: Palette, title: "Personalizar Página", route: "/store/customize" },
   { icon: Package, title: "Configurar Produtos", route: "/store/products" },
-  { icon: Menu, title: "Configurar Cardápio", route: "/store/menu" },
+  { icon: ShoppingCart, title: "Pedidos", route: "/store/orders" },
   { icon: Users, title: "Gerenciar Membros", route: "/store/members" },
   { icon: DollarSign, title: "Financeiro", route: "/store/financial" }
 ];
 
 export function StoreSidebar() {
+  const location = useLocation();
+  
   return (
     <motion.div 
       className="fixed left-0 top-0 h-full w-64 bg-card/80 backdrop-blur-xl border-r border-border/50 z-40"
@@ -58,7 +57,7 @@ export function StoreSidebar() {
               <Link
                 to={item.route}
                 className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all hover:bg-primary/10 ${
-                  item.active ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:text-foreground'
+                  location.pathname === item.route ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
                 <item.icon className="w-5 h-5" />

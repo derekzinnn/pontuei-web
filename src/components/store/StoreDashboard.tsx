@@ -2,72 +2,34 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
 import { 
-  Store, 
-  Package, 
-  Menu, 
   Settings, 
   Users, 
-  DollarSign, 
   CheckCircle, 
   AlertCircle,
   TrendingUp,
   Eye,
-  Edit,
-  Plus
+  Plus,
+  BarChart3,
+  ShoppingBag,
+  Gift,
+  CreditCard,
+  FileText
 } from "lucide-react";
 import { StoreSidebar, StoreHeader } from "@/components/store";
 
 const setupTasks = [
-  { id: 1, title: "Informações Básicas", completed: true, description: "Nome, descrição da loja" },
-  { id: 2, title: "Cadastro Completo", completed: false, description: "Endereço, CNPJ, documentos" },
-  { id: 3, title: "Personalizar Página", completed: false, description: "Banner, logo, cores" },
-  { id: 4, title: "Configurar Produtos", completed: false, description: "Adicionar produtos/serviços" },
-  { id: 5, title: "Configurar Cardápio", completed: false, description: "Menu e sistema de pontos" }
-];
-
-const menuItems = [
-  { 
-    icon: Package, 
-    title: "Configurar Produtos", 
-    description: "Gerencie seu catálogo de produtos",
-    status: "pending",
-    route: "/store/products"
-  },
-  { 
-    icon: Menu, 
-    title: "Configurar Cardápio", 
-    description: "Configure menu e sistema de pontos",
-    status: "pending",
-    route: "/store/menu"
-  },
-  { 
-    icon: Settings, 
-    title: "Configurar Página", 
-    description: "Personalize sua loja",
-    status: "pending",
-    route: "/store/settings"
-  },
-  { 
-    icon: Users, 
-    title: "Gerenciar Membros", 
-    description: "Equipe e permissões",
-    status: "pending",
-    route: "/store/members"
-  },
-  { 
-    icon: DollarSign, 
-    title: "Financeiro", 
-    description: "Relatórios e DRE",
-    status: "pending",
-    route: "/store/financial"
-  }
+  { id: 1, title: "Cadastro Completo", completed: false, description: "CNPJ, endereço, documentos" },
+  { id: 2, title: "Personalizar Página", completed: false, description: "Banner, logo, cores" },
+  { id: 3, title: "Configurar Produtos", completed: false, description: "Adicionar produtos/serviços" },
+  { id: 4, title: "Configurar Cardápio", completed: false, description: "Menu e sistema de pontos" }
 ];
 
 export function StoreDashboard() {
-  const [completedTasks] = useState(1);
+  const [completedTasks] = useState(0);
+  const [activeTab, setActiveTab] = useState("overview");
   const totalTasks = setupTasks.length;
   const progressPercentage = (completedTasks / totalTasks) * 100;
 
@@ -77,190 +39,257 @@ export function StoreDashboard() {
       <StoreHeader />
       
       <div className="ml-64 mt-16 p-6">
+        <div className="space-y-6">
+          {/* Stats Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Total de Clientes</CardTitle>
+                <Users className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">1,234</div>
+                <p className="text-xs text-muted-foreground">
+                  +12% em relação ao mês passado
+                </p>
+              </CardContent>
+            </Card>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Setup Progress */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              <Card className="border-0 shadow-elegant">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-500" />
-                    Configuração da Loja
-                  </CardTitle>
-                  <CardDescription>Complete todos os passos para ativar sua loja</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium">Progresso geral</span>
-                      <span className="text-sm text-muted-foreground">{completedTasks}/{totalTasks} concluídos</span>
-                    </div>
-                    <Progress value={progressPercentage} className="h-3" />
-                    
-                    <div className="space-y-3 mt-6">
-                      {setupTasks.map((task) => (
-                        <div key={task.id} className="flex items-center gap-3 p-3 rounded-lg bg-secondary/20">
-                          {task.completed ? (
-                            <CheckCircle className="w-5 h-5 text-green-500" />
-                          ) : (
-                            <AlertCircle className="w-5 h-5 text-orange-500" />
-                          )}
-                          <div className="flex-1">
-                            <h4 className="font-medium">{task.title}</h4>
-                            <p className="text-sm text-muted-foreground">{task.description}</p>
-                          </div>
-                          {!task.completed && (
-                            <Button size="sm" variant="outline">Configurar</Button>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Pontos Distribuídos</CardTitle>
+                <BarChart3 className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">45,231</div>
+                <p className="text-xs text-muted-foreground">
+                  +8% em relação ao mês passado
+                </p>
+              </CardContent>
+            </Card>
 
-            {/* Quick Actions */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <Card className="border-0 shadow-elegant">
-                <CardHeader>
-                  <CardTitle>Ações Rápidas</CardTitle>
-                  <CardDescription>Gerencie os principais aspectos da sua loja</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    {menuItems.map((item, index) => (
-                      <motion.div
-                        key={index}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="p-4 rounded-lg border border-border/50 hover:shadow-md transition-all cursor-pointer"
-                      >
-                        <div className="flex items-start gap-3">
-                          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                            <item.icon className="w-5 h-5 text-primary" />
-                          </div>
-                          <div className="flex-1">
-                            <h3 className="font-medium mb-1">{item.title}</h3>
-                            <p className="text-sm text-muted-foreground">{item.description}</p>
-                          </div>
-                          <Badge variant="outline" className="text-xs">
-                            {item.status === 'pending' ? 'Pendente' : 'Configurado'}
-                          </Badge>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Vendas do Mês</CardTitle>
+                <ShoppingBag className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">R$ 12,345</div>
+                <p className="text-xs text-muted-foreground">
+                  +15% em relação ao mês passado
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Taxa de Conversão</CardTitle>
+                <TrendingUp className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">3.2%</div>
+                <p className="text-xs text-muted-foreground">
+                  +0.5% em relação ao mês passado
+                </p>
+              </CardContent>
+            </Card>
           </div>
 
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Store Status */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <Card className="border-0 shadow-elegant">
+          {/* Dashboard Tabs */}
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <TabsList className="grid w-full grid-cols-5">
+              <TabsTrigger value="overview" className="flex items-center gap-2">
+                <BarChart3 className="h-4 w-4" />
+                Visão Geral
+              </TabsTrigger>
+              <TabsTrigger value="customers" className="flex items-center gap-2">
+                <Users className="h-4 w-4" />
+                Clientes
+              </TabsTrigger>
+              <TabsTrigger value="transactions" className="flex items-center gap-2">
+                <CreditCard className="h-4 w-4" />
+                Transações
+              </TabsTrigger>
+              <TabsTrigger value="rewards" className="flex items-center gap-2">
+                <Gift className="h-4 w-4" />
+                Recompensas
+              </TabsTrigger>
+              <TabsTrigger value="reports" className="flex items-center gap-2">
+                <FileText className="h-4 w-4" />
+                Relatórios
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="overview" className="space-y-6">
+              {/* Setup Progress */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                <Card className="border-0 shadow-elegant">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <CheckCircle className="w-5 h-5 text-green-500" />
+                      Configuração da Loja
+                    </CardTitle>
+                    <CardDescription>Complete todos os passos para ativar sua loja</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm font-medium">Progresso geral</span>
+                        <span className="text-sm text-muted-foreground">{completedTasks}/{totalTasks} concluídos</span>
+                      </div>
+                      <Progress value={progressPercentage} className="h-3" />
+                      
+                      <div className="space-y-3 mt-6">
+                        {setupTasks.map((task) => (
+                          <div key={task.id} className="flex items-center gap-3 p-3 rounded-lg bg-secondary/20">
+                            {task.completed ? (
+                              <CheckCircle className="w-5 h-5 text-green-500" />
+                            ) : (
+                              <AlertCircle className="w-5 h-5 text-orange-500" />
+                            )}
+                            <div className="flex-1">
+                              <h4 className="font-medium">{task.title}</h4>
+                              <p className="text-sm text-muted-foreground">{task.description}</p>
+                            </div>
+                            {!task.completed && (
+                              <Button size="sm" variant="outline">Configurar</Button>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Quick Actions */}
+              <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Store className="w-5 h-5" />
-                    Status da Loja
-                  </CardTitle>
+                  <CardTitle>Ações Rápidas</CardTitle>
+                  <CardDescription>
+                    Gerencie sua loja de forma rápida e eficiente
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm">Status</span>
-                      <Badge variant="outline" className="bg-orange-50 text-orange-600 border-orange-200">
-                        Em Configuração
-                      </Badge>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm">Visibilidade</span>
-                      <Badge variant="outline">Privada</Badge>
-                    </div>
-                    <Button className="w-full" disabled>
-                      <Eye className="w-4 h-4 mr-2" />
-                      Visualizar Loja
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <Button className="h-20 flex flex-col gap-2">
+                      <Plus className="h-6 w-6" />
+                      Adicionar Cliente
+                    </Button>
+                    <Button variant="outline" className="h-20 flex flex-col gap-2">
+                      <Eye className="h-6 w-6" />
+                      Ver Relatórios
+                    </Button>
+                    <Button variant="outline" className="h-20 flex flex-col gap-2">
+                      <Settings className="h-6 w-6" />
+                      Configurações
                     </Button>
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
 
-            {/* Quick Stats */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <Card className="border-0 shadow-elegant">
+              {/* Recent Activity */}
+              <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <TrendingUp className="w-5 h-5" />
-                    Resumo
-                  </CardTitle>
+                  <CardTitle>Atividade Recente</CardTitle>
+                  <CardDescription>
+                    Últimas transações e atividades da sua loja
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold">0</div>
-                      <p className="text-sm text-muted-foreground">Produtos cadastrados</p>
+                    <div className="flex items-center justify-between p-4 border rounded-lg">
+                      <div>
+                        <p className="font-medium">João Silva ganhou 50 pontos</p>
+                        <p className="text-sm text-muted-foreground">Compra de R$ 100,00 - Há 2 horas</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-medium text-green-600">+50 pts</p>
+                      </div>
                     </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold">0</div>
-                      <p className="text-sm text-muted-foreground">Clientes ativos</p>
+                    <div className="flex items-center justify-between p-4 border rounded-lg">
+                      <div>
+                        <p className="font-medium">Maria Santos resgatou recompensa</p>
+                        <p className="text-sm text-muted-foreground">Desconto de 10% - Há 4 horas</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-medium text-red-600">-100 pts</p>
+                      </div>
                     </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold">R$ 0</div>
-                      <p className="text-sm text-muted-foreground">Faturamento mensal</p>
+                    <div className="flex items-center justify-between p-4 border rounded-lg">
+                      <div>
+                        <p className="font-medium">Carlos Oliveira se cadastrou</p>
+                        <p className="text-sm text-muted-foreground">Novo cliente - Há 6 horas</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-medium text-blue-600">Novo</p>
+                      </div>
                     </div>
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
+            </TabsContent>
 
-            {/* Quick Actions */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
-              <Card className="border-0 shadow-elegant">
+            <TabsContent value="customers" className="space-y-6">
+              <Card>
                 <CardHeader>
-                  <CardTitle>Ações</CardTitle>
+                  <CardTitle>Gerenciar Clientes</CardTitle>
+                  <CardDescription>
+                    Visualize e gerencie todos os seus clientes
+                  </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-3">
-                  <Button className="w-full justify-start" variant="outline">
-                    <Plus className="w-4 h-4 mr-2" />
-                    Adicionar Produto
-                  </Button>
-                  <Button className="w-full justify-start" variant="outline">
-                    <Edit className="w-4 h-4 mr-2" />
-                    Editar Perfil
-                  </Button>
-                  <Button className="w-full justify-start" variant="outline">
-                    <Settings className="w-4 h-4 mr-2" />
-                    Configurações
-                  </Button>
+                <CardContent>
+                  <p className="text-muted-foreground">Funcionalidade de gerenciamento de clientes em desenvolvimento...</p>
                 </CardContent>
               </Card>
-            </motion.div>
-          </div>
+            </TabsContent>
+
+            <TabsContent value="transactions" className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Histórico de Transações</CardTitle>
+                  <CardDescription>
+                    Visualize todas as transações de pontos
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">Funcionalidade de transações em desenvolvimento...</p>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="rewards" className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Gerenciar Recompensas</CardTitle>
+                  <CardDescription>
+                    Crie e gerencie as recompensas da sua loja
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">Funcionalidade de recompensas em desenvolvimento...</p>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="reports" className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Relatórios e Análises</CardTitle>
+                  <CardDescription>
+                    Visualize relatórios detalhados do seu negócio
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">Funcionalidade de relatórios em desenvolvimento...</p>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </div>

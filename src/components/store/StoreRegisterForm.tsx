@@ -4,96 +4,61 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, Mail, User, Sparkles } from "lucide-react";
+import { ArrowRight, User} from "lucide-react";
 import { Link } from "react-router-dom";
 
 export function StoreRegisterForm() {
-  const [userData, setUserData] = useState({
+  const [currentStep, setCurrentStep] = useState(2);
+  const [formData, setFormData] = useState({
+    // Dados pessoais
     name: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
+    // Dados da empresa
+    cnpj: "",
+    companyName: "",
+    tradeName: "",
+    // Localização da loja
+    address: "",
+    number: "",
+    complement: "",
+    neighborhood: "",
+    city: "",
+    state: "",
+    zipCode: "",
+    // Informações do estabelecimento
+    phone: "",
+    category: "",
+    storeName: "",
+    storeDescription: "",
+    // Configurações finais
+    workingHours: "",
+    website: "",
+    socialMedia: ""
   });
 
-  const handleUserDataChange = (field: string, value: string) => {
-    setUserData(prev => ({ ...prev, [field]: value }));
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
+
+  const nextStep = () => setCurrentStep(prev => prev + 1);
+  const prevStep = () => setCurrentStep(prev => prev - 1);
 
   const handleSubmit = () => {
-    console.log('User registration:', userData);
+    console.log('Complete registration:', formData);
   };
 
+  const totalSteps = 4;
+  const stepTitles = [
+    "Dados da Empresa", 
+    "Localização da Loja",
+    "Informações do Estabelecimento",
+    "Configurações Finais"
+  ];
+
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-pink-light via-background to-pink-light overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div 
-          className="absolute top-20 -left-20 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-primary/30 via-pink-glow/20 to-transparent blur-3xl animate-float"
-        />
-        <motion.div 
-          className="absolute top-40 right-0 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-pink-glow/25 via-primary/20 to-transparent blur-3xl animate-float-slow"
-        />
-        <motion.div 
-          className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-gradient-to-br from-primary/20 via-pink-light/30 to-transparent blur-3xl animate-pulse-glow"
-        />
-        
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px]">
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/30 via-pink-glow/30 to-primary/30 blur-3xl animate-rotate-gradient" />
-        </div>
-
-        <div className="absolute inset-0 opacity-[0.04]">
-          <div 
-            className="absolute inset-0 animate-grid-flow"
-            style={{
-              backgroundImage: `
-                linear-gradient(to right, hsl(var(--primary)) 1px, transparent 1px),
-                linear-gradient(to bottom, hsl(var(--primary)) 1px, transparent 1px)
-              `,
-              backgroundSize: '80px 80px',
-            }}
-          />
-        </div>
-
-        {[...Array(30)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-primary/40 rounded-full pointer-events-none"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -100, 0],
-              x: [0, Math.random() * 50 - 25, 0],
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 3,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Simple Logo Header */}
-      <div className="relative z-10 px-6 py-6">
-        <Link to="/" className="flex items-center gap-2">
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          >
-            <Sparkles className="w-6 h-6 text-primary" />
-          </motion.div>
-          <span className="text-2xl font-bold bg-clip-text text-transparent bg-primary">
-            Pontuei
-          </span>
-        </Link>
-      </div>
-
-      <div className="relative z-10 px-6 pb-12">
-        <div className="max-w-2xl w-full mx-auto">
+    <div className="max-w-2xl w-full mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -101,11 +66,19 @@ export function StoreRegisterForm() {
             className="text-center mb-8"
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Cadastre sua <span className="text-primary">conta</span>
+              Cadastro <span className="text-primary">Completo</span>
             </h1>
             <p className="text-xl text-muted-foreground">
-              Crie sua conta para acessar a plataforma
+              Passo {currentStep - 1} de {totalSteps}: {stepTitles[currentStep - 2]}
             </p>
+            
+            {/* Progress Bar */}
+            <div className="w-full bg-muted rounded-full h-2 mt-4">
+              <div 
+                className="bg-primary h-2 rounded-full transition-all duration-300"
+                style={{ width: `${((currentStep - 1) / totalSteps) * 100}%` }}
+              />
+            </div>
           </motion.div>
 
           <motion.div
@@ -116,81 +89,297 @@ export function StoreRegisterForm() {
             <Card className="border-0 shadow-2xl bg-card/80 backdrop-blur-xl">
               <CardHeader className="text-center">
                 <CardTitle className="flex items-center justify-center gap-2">
-                  <User className="w-6 h-6 text-primary" /> Dados Pessoais
+                  {currentStep === 2 && <><User className="w-6 h-6 text-primary" /> Dados da Empresa</>}
+                  {currentStep === 3 && <><User className="w-6 h-6 text-primary" /> Localização da Loja</>}
+                  {currentStep === 4 && <><User className="w-6 h-6 text-primary" /> Informações do Estabelecimento</>}
+                  {currentStep === 5 && <><User className="w-6 h-6 text-primary" /> Configurações Finais</>}
                 </CardTitle>
                 <CardDescription>
-                  Crie sua conta para acessar a plataforma
+                  {currentStep === 2 && "Dados da sua empresa"}
+                  {currentStep === 3 && "Endereço e localização da sua loja"}
+                  {currentStep === 4 && "Informações do seu estabelecimento"}
+                  {currentStep === 5 && "Configurações finais da loja"}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="space-y-2">
-                  <Label htmlFor="name" className="flex items-center gap-2">
-                    <User className="w-4 h-4" />
-                    Nome Completo
-                  </Label>
-                  <Input
-                    id="name"
-                    placeholder="Seu nome completo"
-                    value={userData.name}
-                    onChange={(e) => handleUserDataChange('name', e.target.value)}
-                  />
-                </div>
+                {currentStep === 2 && (
+                  // Passo 2: Dados da Empresa
+                  <>
+                    <div className="space-y-2">
+                      <Label htmlFor="cnpj">CNPJ</Label>
+                      <Input
+                        id="cnpj"
+                        placeholder="00.000.000/0000-00"
+                        value={formData.cnpj}
+                        onChange={(e) => handleInputChange('cnpj', e.target.value)}
+                      />
+                    </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="flex items-center gap-2">
-                    <Mail className="w-4 h-4" />
-                    E-mail
-                  </Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="seu@email.com"
-                    value={userData.email}
-                    onChange={(e) => handleUserDataChange('email', e.target.value)}
-                  />
-                </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="companyName">Razão Social</Label>
+                      <Input
+                        id="companyName"
+                        placeholder="Nome da empresa conforme CNPJ"
+                        value={formData.companyName}
+                        onChange={(e) => handleInputChange('companyName', e.target.value)}
+                      />
+                    </div>
 
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="password">Senha</Label>
-                    <Input
-                      id="password"
-                      type="password"
-                      placeholder="••••••••"
-                      value={userData.password}
-                      onChange={(e) => handleUserDataChange('password', e.target.value)}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="confirmPassword">Confirmar Senha</Label>
-                    <Input
-                      id="confirmPassword"
-                      type="password"
-                      placeholder="••••••••"
-                      value={userData.confirmPassword}
-                      onChange={(e) => handleUserDataChange('confirmPassword', e.target.value)}
-                    />
-                  </div>
-                </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="tradeName">Nome Fantasia</Label>
+                      <Input
+                        id="tradeName"
+                        placeholder="Nome comercial da loja"
+                        value={formData.tradeName}
+                        onChange={(e) => handleInputChange('tradeName', e.target.value)}
+                      />
+                    </div>
 
-                <div className="pt-4">
-                  <Link to="/store-dashboard">
-                    <Button 
-                      className="w-full text-lg py-6 group"
-                      onClick={handleSubmit}
-                    >
-                      Criar Conta
-                      <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                  </Link>
-                </div>
+                    <div className="flex gap-4 pt-4">
+                      <Button 
+                        variant="outline"
+                        className="flex-1 text-lg py-6"
+                        onClick={prevStep}
+                      >
+                        Voltar
+                      </Button>
+                      <Button 
+                        className="flex-1 text-lg py-6 group"
+                        onClick={nextStep}
+                      >
+                        Próximo Passo
+                        <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                    </div>
+                  </>
+                )}
+
+                {currentStep === 3 && (
+                  // Passo 3: Localização da Loja
+                  <>
+                    <div className="space-y-2">
+                      <Label htmlFor="zipCode">CEP</Label>
+                      <Input
+                        id="zipCode"
+                        placeholder="00000-000"
+                        value={formData.zipCode}
+                        onChange={(e) => handleInputChange('zipCode', e.target.value)}
+                      />
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-4">
+                      <div className="md:col-span-2 space-y-2">
+                        <Label htmlFor="address">Endereço</Label>
+                        <Input
+                          id="address"
+                          placeholder="Nome da rua"
+                          value={formData.address}
+                          onChange={(e) => handleInputChange('address', e.target.value)}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="number">Número</Label>
+                        <Input
+                          id="number"
+                          placeholder="123"
+                          value={formData.number}
+                          onChange={(e) => handleInputChange('number', e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="complement">Complemento</Label>
+                        <Input
+                          id="complement"
+                          placeholder="Apto, sala, loja (opcional)"
+                          value={formData.complement}
+                          onChange={(e) => handleInputChange('complement', e.target.value)}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="neighborhood">Bairro</Label>
+                        <Input
+                          id="neighborhood"
+                          placeholder="Nome do bairro"
+                          value={formData.neighborhood}
+                          onChange={(e) => handleInputChange('neighborhood', e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="city">Cidade</Label>
+                        <Input
+                          id="city"
+                          placeholder="Nome da cidade"
+                          value={formData.city}
+                          onChange={(e) => handleInputChange('city', e.target.value)}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="state">Estado</Label>
+                        <Input
+                          id="state"
+                          placeholder="UF"
+                          value={formData.state}
+                          onChange={(e) => handleInputChange('state', e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex gap-4 pt-4">
+                      <Button 
+                        variant="outline"
+                        className="flex-1 text-lg py-6"
+                        onClick={prevStep}
+                      >
+                        Voltar
+                      </Button>
+                      <Button 
+                        className="flex-1 text-lg py-6 group"
+                        onClick={nextStep}
+                      >
+                        Próximo Passo
+                        <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                    </div>
+                  </>
+                )}
+
+                {currentStep === 4 && (
+                  // Passo 4: Informações do Estabelecimento
+                  <>
+                    <div className="space-y-2">
+                      <Label htmlFor="storeName">Nome do Estabelecimento</Label>
+                      <Input
+                        id="storeName"
+                        placeholder="Como sua loja será conhecida"
+                        value={formData.storeName}
+                        onChange={(e) => handleInputChange('storeName', e.target.value)}
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="storeDescription">Descrição da Loja</Label>
+                      <Input
+                        id="storeDescription"
+                        placeholder="Descreva o que sua loja oferece"
+                        value={formData.storeDescription}
+                        onChange={(e) => handleInputChange('storeDescription', e.target.value)}
+                      />
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="phone">Telefone</Label>
+                        <Input
+                          id="phone"
+                          placeholder="(11) 99999-9999"
+                          value={formData.phone}
+                          onChange={(e) => handleInputChange('phone', e.target.value)}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="category">Categoria</Label>
+                        <select
+                          id="category"
+                          className="w-full px-3 py-2 border border-border rounded-md bg-background"
+                          value={formData.category}
+                          onChange={(e) => handleInputChange('category', e.target.value)}
+                        >
+                          <option value="">Selecione uma categoria</option>
+                          <option value="alimentacao">Alimentação</option>
+                          <option value="moda">Moda e Vestuário</option>
+                          <option value="beleza">Beleza e Estética</option>
+                          <option value="farmacia">Farmácia</option>
+                          <option value="eletronicos">Eletrônicos</option>
+                          <option value="casa">Casa e Decoração</option>
+                          <option value="servicos">Serviços</option>
+                          <option value="outros">Outros</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-4 pt-4">
+                      <Button 
+                        variant="outline"
+                        className="flex-1 text-lg py-6"
+                        onClick={prevStep}
+                      >
+                        Voltar
+                      </Button>
+                      <Button 
+                        className="flex-1 text-lg py-6 group"
+                        onClick={nextStep}
+                      >
+                        Próximo Passo
+                        <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                    </div>
+                  </>
+                )}
+
+                {currentStep === 5 && (
+                  // Passo 5: Configurações Finais
+                  <>
+                    <div className="space-y-2">
+                      <Label htmlFor="workingHours">Horário de Funcionamento</Label>
+                      <Input
+                        id="workingHours"
+                        placeholder="Ex: Segunda a Sexta: 8h às 18h"
+                        value={formData.workingHours}
+                        onChange={(e) => handleInputChange('workingHours', e.target.value)}
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="website">Site (opcional)</Label>
+                      <Input
+                        id="website"
+                        placeholder="https://www.sualoja.com.br"
+                        value={formData.website}
+                        onChange={(e) => handleInputChange('website', e.target.value)}
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="socialMedia">Redes Sociais (opcional)</Label>
+                      <Input
+                        id="socialMedia"
+                        placeholder="@sualoja no Instagram"
+                        value={formData.socialMedia}
+                        onChange={(e) => handleInputChange('socialMedia', e.target.value)}
+                      />
+                    </div>
+
+                    <div className="flex gap-4 pt-4">
+                      <Button 
+                        variant="outline"
+                        className="flex-1 text-lg py-6"
+                        onClick={prevStep}
+                      >
+                        Voltar
+                      </Button>
+                      <Link to="/store-dashboard" className="flex-1">
+                        <Button 
+                          className="w-full text-lg py-6 group"
+                          onClick={handleSubmit}
+                        >
+                          Finalizar Cadastro
+                          <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        </Button>
+                      </Link>
+                    </div>
+                  </>
+                )}
 
 
               </CardContent>
             </Card>
           </motion.div>
-        </div>
-      </div>
     </div>
   );
 }
