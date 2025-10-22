@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, User} from "lucide-react";
+import { ArrowRight, Building2, MapPin, Store, Settings, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export function StoreRegisterForm() {
@@ -60,100 +60,146 @@ export function StoreRegisterForm() {
   ];
 
   return (
-    <div className="max-w-2xl w-full mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-8"
-          >
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Cadastro <span className="text-primary">Completo</span>
-            </h1>
-            <p className="text-xl text-muted-foreground">
-              Passo {currentStep - 1} de {totalSteps}: {stepTitles[currentStep - 2]}
-            </p>
-            
-            {/* Progress Bar */}
-            <div className="w-full bg-muted rounded-full h-2 mt-4">
-              <div 
-                className="bg-primary h-2 rounded-full transition-all duration-300"
-                style={{ width: `${((currentStep - 1) / totalSteps) * 100}%` }}
-              />
-            </div>
-          </motion.div>
+    <div className="min-h-screen bg-gradient-to-br from-pink-light via-background to-pink-light overflow-hidden relative">
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div 
+          className="absolute top-20 -left-20 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-primary/30 via-pink-glow/20 to-transparent blur-3xl animate-float"
+        />
+        <motion.div 
+          className="absolute top-40 right-0 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-pink-glow/25 via-primary/20 to-transparent blur-3xl animate-float-slow"
+        />
+        <motion.div 
+          className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-gradient-to-br from-primary/20 via-pink-light/30 to-transparent blur-3xl animate-pulse-glow"
+        />
+      </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <Card className="border-0 shadow-2xl bg-card/80 backdrop-blur-xl">
-              <CardHeader className="text-center">
-                <CardTitle className="flex items-center justify-center gap-2">
-                  {currentStep === 2 && <><User className="w-6 h-6 text-primary" /> Dados da Empresa</>}
-                  {currentStep === 3 && <><User className="w-6 h-6 text-primary" /> Localização da Loja</>}
-                  {currentStep === 4 && <><User className="w-6 h-6 text-primary" /> Informações do Estabelecimento</>}
-                  {currentStep === 5 && <><User className="w-6 h-6 text-primary" /> Configurações Finais</>}
-                </CardTitle>
-                <CardDescription>
-                  {currentStep === 2 && "Dados da sua empresa"}
-                  {currentStep === 3 && "Endereço e localização da sua loja"}
-                  {currentStep === 4 && "Informações do seu estabelecimento"}
-                  {currentStep === 5 && "Configurações finais da loja"}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
+      <div className="relative z-10 max-w-4xl w-full mx-auto px-6 py-12">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-12"
+        >
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-pink-glow">
+              Cadastro Completo
+            </span>
+          </h1>
+          <p className="text-xl md:text-2xl text-muted-foreground mb-8">
+            Passo {currentStep - 1} de {totalSteps}: {stepTitles[currentStep - 2]}
+          </p>
+          
+          {/* Progress Steps */}
+          <div className="flex justify-center items-center gap-4 mb-8">
+            {Array.from({ length: totalSteps }, (_, i) => (
+              <div key={i} className="flex items-center">
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
+                  i < currentStep - 1 
+                    ? 'bg-primary border-primary text-white' 
+                    : i === currentStep - 1
+                    ? 'bg-primary/20 border-primary text-primary'
+                    : 'bg-muted border-muted-foreground/30 text-muted-foreground'
+                }`}>
+                  {i < currentStep - 1 ? (
+                    <CheckCircle className="w-5 h-5" />
+                  ) : (
+                    <span className="text-sm font-medium">{i + 1}</span>
+                  )}
+                </div>
+                {i < totalSteps - 1 && (
+                  <div className={`w-12 h-0.5 mx-2 transition-all duration-300 ${
+                    i < currentStep - 1 ? 'bg-primary' : 'bg-muted-foreground/30'
+                  }`} />
+                )}
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <Card className="border-0 shadow-elegant bg-card/90 backdrop-blur-xl">
+            <CardHeader className="text-center pb-8">
+              <CardTitle className="flex items-center justify-center gap-3 text-2xl">
+                {currentStep === 2 && <><Building2 className="w-7 h-7 text-primary" /> Dados da Empresa</>}
+                {currentStep === 3 && <><MapPin className="w-7 h-7 text-primary" /> Localização da Loja</>}
+                {currentStep === 4 && <><Store className="w-7 h-7 text-primary" /> Informações do Estabelecimento</>}
+                {currentStep === 5 && <><Settings className="w-7 h-7 text-primary" /> Configurações Finais</>}
+              </CardTitle>
+              <CardDescription className="text-lg">
+                {currentStep === 2 && "Informações legais da sua empresa"}
+                {currentStep === 3 && "Onde sua loja está localizada"}
+                {currentStep === 4 && "Como sua loja será apresentada"}
+                {currentStep === 5 && "Últimos detalhes para finalizar"}
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-8 px-8 pb-8">
                 {currentStep === 2 && (
-                  // Passo 2: Dados da Empresa
-                  <>
-                    <div className="space-y-2">
-                      <Label htmlFor="cnpj">CNPJ</Label>
+                  <motion.div 
+                    className="space-y-6"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <div className="space-y-3">
+                      <Label htmlFor="cnpj" className="text-base font-medium">CNPJ</Label>
                       <Input
                         id="cnpj"
                         placeholder="00.000.000/0000-00"
                         value={formData.cnpj}
                         onChange={(e) => handleInputChange('cnpj', e.target.value)}
+                        className="h-12 text-base"
                       />
                     </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="companyName">Razão Social</Label>
+                    <div className="space-y-3">
+                      <Label htmlFor="companyName" className="text-base font-medium">Razão Social</Label>
                       <Input
                         id="companyName"
                         placeholder="Nome da empresa conforme CNPJ"
                         value={formData.companyName}
                         onChange={(e) => handleInputChange('companyName', e.target.value)}
+                        className="h-12 text-base"
                       />
                     </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="tradeName">Nome Fantasia</Label>
+                    <div className="space-y-3">
+                      <Label htmlFor="tradeName" className="text-base font-medium">Nome Fantasia</Label>
                       <Input
                         id="tradeName"
                         placeholder="Nome comercial da loja"
                         value={formData.tradeName}
                         onChange={(e) => handleInputChange('tradeName', e.target.value)}
+                        className="h-12 text-base"
                       />
                     </div>
 
-                    <div className="flex gap-4 pt-4">
+                    <motion.div 
+                      className="flex gap-6 pt-8"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.3 }}
+                    >
                       <Button 
                         variant="outline"
-                        className="flex-1 text-lg py-6"
+                        className="flex-1 text-lg py-6 h-14"
                         onClick={prevStep}
                       >
                         Voltar
                       </Button>
                       <Button 
-                        className="flex-1 text-lg py-6 group"
+                        className="flex-1 text-lg py-6 h-14 group shadow-glow hover:shadow-primary/50"
                         onClick={nextStep}
                       >
                         Próximo Passo
                         <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                       </Button>
-                    </div>
-                  </>
+                    </motion.div>
+                  </motion.div>
                 )}
 
                 {currentStep === 3 && (
@@ -379,9 +425,10 @@ export function StoreRegisterForm() {
                 )}
 
 
-              </CardContent>
-            </Card>
-          </motion.div>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </div>
     </div>
   );
 }

@@ -1,17 +1,20 @@
 import { Scene3D } from "@/components/layout/Scene3d";
 import { AdminNavigation, AdminHeroContent, AdminBackground } from "@/components/admin";
+import { useNavigate } from "react-router-dom";
 
 export const Hero = () => {
+  const navigate = useNavigate();
+
   const handleLogin = () => {
-    console.log('Login clicked');
+    navigate('/login');
   };
 
   const handleRegister = () => {
-    console.log('Register clicked');
+    navigate('/login');
   };
 
   const handleGetStarted = () => {
-    console.log('Get started clicked');
+    navigate('/login?store=true');
   };
 
   return (

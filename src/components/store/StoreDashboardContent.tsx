@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Progress } from "@/components/ui/progress";
 import { 
   Settings, 
   Users, 
@@ -12,8 +13,11 @@ import {
   ShoppingBag,
   Gift,
   CreditCard,
-  FileText
+  FileText,
+  Store,
+  ArrowRight
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const setupTasks = [
   { id: 1, title: "Cadastro Completo", completed: false, description: "CNPJ, endereço, documentos" },
@@ -25,11 +29,64 @@ const setupTasks = [
 export function StoreDashboardContent() {
   const [completedTasks] = useState(0);
   const [activeTab, setActiveTab] = useState("overview");
+  const [isStoreSetupComplete, setIsStoreSetupComplete] = useState(false);
+  
   const totalTasks = setupTasks.length;
   const progressPercentage = (completedTasks / totalTasks) * 100;
 
+  useEffect(() => {
+    // Verifica se o cadastro da loja foi completado
+    const setupComplete = localStorage.getItem('storeRegistrationComplete');
+    setIsStoreSetupComplete(setupComplete === 'true');
+  }, []);
+
   return (
     <div className="space-y-6">
+      {/* Store Setup Card - Mostrar apenas se não completou o cadastro */}
+      {!isStoreSetupComplete && (
+        <Card className="border-primary/20 bg-gradient-to-r from-primary/5 to-pink-glow/5">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Store className="h-5 w-5 text-primary" />
+              Complete o Cadastro da Sua Loja
+            </CardTitle>
+            <CardDescription>
+              Finalize o cadastro da sua loja para começar a usar todas as funcionalidades do Pontuei Business
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span>Progresso do cadastro</span>
+                <span>{Math.round(progressPercentage)}%</span>
+              </div>
+              <Progress value={progressPercentage} className="h-2" />
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {setupTasks.map((task) => (
+                <div key={task.id} className="flex items-center gap-3 p-3 bg-background/50 rounded-lg">
+                  <div className={`w-3 h-3 rounded-full ${
+                    task.completed ? 'bg-green-500' : 'bg-muted-foreground/30'
+                  }`} />
+                  <div>
+                    <p className="text-sm font-medium">{task.title}</p>
+                    <p className="text-xs text-muted-foreground">{task.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <Link to="/store-register">
+              <Button className="w-full group">
+                Completar Cadastro da Loja
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
+      )}
+
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Card>

@@ -1,77 +1,169 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 import { Smartphone, BarChart3, Zap, Shield, Headphones, Rocket } from "lucide-react";
 
 const features = [
   {
     icon: Smartphone,
     title: "App Moderno",
-    description: "Interface intuitiva que seus clientes vão amar usar"
+    description: "Interface intuitiva que seus clientes vão amar usar",
+    position: { x: "8%", y: "5%" },
+    connectionPoint: { x: "22%", y: "25%" }
   },
   {
     icon: BarChart3,
     title: "Dashboard Completo",
-    description: "Acompanhe vendas, clientes e métricas em tempo real"
+    description: "Acompanhe vendas, clientes e métricas em tempo real",
+    position: { x: "65%", y: "8%" },
+    connectionPoint: { x: "65%", y: "28%" }
   },
   {
     icon: Zap,
     title: "Integração Rápida",
-    description: "Configure sua loja em menos de 5 minutos"
+    description: "Configure sua loja em menos de 5 minutos",
+    position: { x: "12%", y: "45%" },
+    connectionPoint: { x: "26%", y: "65%" }
   },
   {
     icon: Shield,
     title: "Segurança Total",
-    description: "Proteção avançada para todos os dados e transações"
+    description: "Proteção avançada para todos os dados e transações",
+    position: { x: "72%", y: "42%" },
+    connectionPoint: { x: "72%", y: "62%" }
   },
   {
     icon: Headphones,
     title: "Suporte 24/7",
-    description: "Equipe especializada sempre pronta para ajudar"
+    description: "Equipe especializada sempre pronta para ajudar",
+    position: { x: "18%", y: "78%" },
+    connectionPoint: { x: "32%", y: "98%" }
   },
   {
     icon: Rocket,
     title: "Crescimento Garantido",
-    description: "Aumente suas vendas em até 40% no primeiro mês"
+    description: "Aumente suas vendas em até 40% no primeiro mês",
+    position: { x: "68%", y: "75%" },
+    connectionPoint: { x: "68%", y: "95%" }
   }
 ];
 
 export function AdminFeatures() {
-  return (
-    <section className="py-20 bg-gradient-to-br from-secondary/10 to-background">
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-4xl font-bold mb-4">
-            Tudo que sua loja <span className="text-primary">precisa</span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Ferramentas completas para transformar sua loja em um hub de fidelização
-          </p>
-        </motion.div>
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [visibleCards, setVisibleCards] = useState(1);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="group"
-            >
-              <div className="bg-card/60 backdrop-blur-sm rounded-2xl p-8 border border-border/50 hover:shadow-glow transition-all duration-300 hover:-translate-y-2 h-full">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <feature.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
-              </div>
-            </motion.div>
-          ))}
+  // Caminho SVG completo e estático
+  const pathData = `M 22 25 C 40 15, 50 35, 65 28 C 45 45, 15 55, 26 65 C 50 70, 85 50, 72 62 C 55 80, 25 90, 32 98 C 50 105, 75 85, 68 95`;
+  
+  // Conectar scroll à animação da linha
+  const pathLength = useTransform(scrollYProgress, [0.1, 0.9], [0, 1]);
+
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on("change", (latest) => {
+      const cardCount = Math.floor(latest * (features.length + 2)) + 1;
+      setVisibleCards(Math.min(Math.max(cardCount, 1), features.length));
+    });
+    return unsubscribe;
+  }, [scrollYProgress]);
+
+  return (
+    <section className="relative py-20 bg-gradient-to-br from-secondary/10 to-background">
+      <div ref={containerRef} style={{ height: '300vh' }} className="relative">
+        <div className="sticky top-0 h-screen flex items-center justify-center">
+
+
+          <div className="w-full h-full px-6 relative z-10">
+          <motion.div 
+            className="text-center mb-8"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            <h2 className="text-4xl font-bold mb-4">
+              Tudo que sua loja <span className="text-primary">precisa</span>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Ferramentas completas para transformar sua loja
+            </p>
+          </motion.div>
+
+          <div className="relative w-full h-96">
+            {/* Linha Fluida Animada */}
+            <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 z-0">
+              <defs>
+                <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#E94057" />
+                  <stop offset="100%" stopColor="#F27121" />
+                </linearGradient>
+
+              </defs>
+              
+              <motion.path
+                d={pathData}
+                stroke="#E94057"
+                strokeWidth="2"
+                fill="none"
+                strokeLinecap="round"
+                initial={{ pathLength: 0 }}
+                style={{ pathLength }}
+              />
+            </svg>
+
+            {features.map((feature, index) => {
+              const isVisible = index < visibleCards;
+              const IconComponent = feature.icon;
+              
+              return (
+                <motion.div
+                  key={index}
+                  className="absolute group"
+                  style={{
+                    left: feature.position.x,
+                    top: feature.position.y,
+                    zIndex: 10
+                  }}
+                  initial={{ opacity: 0, x: 100, scale: 0.8 }}
+                  animate={{ 
+                    opacity: isVisible ? 1 : 0, 
+                    x: isVisible ? 0 : 100,
+                    scale: isVisible ? 1 : 0.8
+                  }}
+                  transition={{ 
+                    duration: 0.4, 
+                    ease: "easeOut",
+                    delay: isVisible ? index * 0.1 : 0
+                  }}
+                >
+                  <div className="bg-card/80 backdrop-blur-md rounded-2xl p-5 border border-border/30 hover:border-primary/50 transition-all duration-200 hover:scale-105 w-56 h-40 shadow-lg relative">
+                    {/* Connection Point */}
+                    {isVisible && <div className="absolute w-3 h-3 bg-primary rounded-full -right-1 top-1/2 -translate-y-1/2 border-2 border-white shadow-lg" />}
+                    <div className="w-10 h-10 rounded-xl bg-gradient-primary flex items-center justify-center mb-3 group-hover:rotate-12 transition-transform duration-200">
+                      <IconComponent className="w-5 h-5 text-white" />
+                    </div>
+                    <h3 className="text-base font-bold mb-2">{feature.title}</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{feature.description}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Minimal Progress */}
+          <div className="flex justify-center mt-16 gap-1">
+            {features.map((_, index) => (
+              <motion.div
+                key={index}
+                className={`h-1 rounded-full transition-all duration-200 ${
+                  index < visibleCards ? 'bg-primary w-6' : 'bg-muted-foreground/20 w-2'
+                }`}
+                layout
+              />
+            ))}
+          </div>
+          </div>
         </div>
       </div>
     </section>

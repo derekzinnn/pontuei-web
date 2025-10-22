@@ -12,7 +12,6 @@ const benefits = [
 export function AdminCTA() {
   return (
     <section className="relative py-24 bg-gradient-to-br from-primary/5 via-background to-pink-glow/5 overflow-hidden">
-      {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-20 w-80 h-80 bg-pink-glow/10 rounded-full blur-3xl animate-pulse delay-1000" />
@@ -55,13 +54,12 @@ export function AdminCTA() {
             viewport={{ once: true }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
+            <a href="https://calendar.google.com/calendar/u/0?cid=NzI0MWFmYjlmZmNlY2EyNjE5YWEwZjFhOGQ1MTM5NjFlMThiZGVkMDIwZjA2ZDRkOTAyN2JhMDNjYTcwNzlmZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t">
             <Button size="lg" className="text-lg px-8 py-4 group">
-              Cadastrar Minha Loja Agora
+              Agendar Reunião 
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8 py-4">
-              Falar com Especialista
-            </Button>
+            </a>
           </motion.div>
 
           <p className="text-sm text-muted-foreground mt-6">
