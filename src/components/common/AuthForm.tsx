@@ -18,12 +18,12 @@ export function AuthForm({ onLogin, onRegister }: AuthFormProps) {
 
   const handleLogin = () => {
     onLogin?.(email, password);
-    navigate('/store/complete-setup');
+    navigate('/store-register');
   };
 
   const handleRegister = () => {
     onRegister?.(name, email, password);
-    navigate('/store/complete-setup');
+    navigate('/store-register');
   };
 
   return (

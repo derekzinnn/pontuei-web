@@ -47,6 +47,7 @@ export function StoreRegisterForm() {
   const handleSubmit = () => {
     console.log('Complete registration:', formData);
     localStorage.setItem('storeRegistrationComplete', 'true');
+    window.location.href = '/store-dashboard';
   };
 
   const totalSteps = 4;
@@ -180,13 +181,6 @@ export function StoreRegisterForm() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.3 }}
                     >
-                      <Button 
-                        variant="outline"
-                        className="flex-1 text-lg py-6 h-14"
-                        onClick={prevStep}
-                      >
-                        Voltar
-                      </Button>
                       <Button 
                         className="flex-1 text-lg py-6 h-14 group shadow-glow hover:shadow-primary/50"
                         onClick={nextStep}
