@@ -8,18 +8,17 @@ import { ArrowRight, Building2, MapPin, Store, Settings, CheckCircle } from "luc
 import { Link } from "react-router-dom";
 
 export function StoreRegisterForm() {
-  const [currentStep, setCurrentStep] = useState(2);
+  const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
-    // Dados pessoais
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
-    // Dados da empresa
+
     cnpj: "",
     companyName: "",
     tradeName: "",
-    // Localização da loja
+
     address: "",
     number: "",
     complement: "",
@@ -27,12 +26,12 @@ export function StoreRegisterForm() {
     city: "",
     state: "",
     zipCode: "",
-    // Informações do estabelecimento
+
     phone: "",
     category: "",
     storeName: "",
     storeDescription: "",
-    // Configurações finais
+    
     workingHours: "",
     website: "",
     socialMedia: ""
@@ -47,7 +46,6 @@ export function StoreRegisterForm() {
 
   const handleSubmit = () => {
     console.log('Complete registration:', formData);
-    // Marca o cadastro como completo
     localStorage.setItem('storeRegistrationComplete', 'true');
   };
 
@@ -61,7 +59,6 @@ export function StoreRegisterForm() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-light via-background to-pink-light overflow-hidden relative">
-      {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 
           className="absolute top-20 -left-20 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-primary/30 via-pink-glow/20 to-transparent blur-3xl animate-float"
@@ -87,10 +84,9 @@ export function StoreRegisterForm() {
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-            Passo {currentStep - 1} de {totalSteps}: {stepTitles[currentStep - 2]}
+            Passo {currentStep} de {totalSteps}: {stepTitles[currentStep - 1]}
           </p>
           
-          {/* Progress Steps */}
           <div className="flex justify-center items-center gap-4 mb-8">
             {Array.from({ length: totalSteps }, (_, i) => (
               <div key={i} className="flex items-center">
@@ -125,20 +121,20 @@ export function StoreRegisterForm() {
           <Card className="border-0 shadow-elegant bg-card/90 backdrop-blur-xl">
             <CardHeader className="text-center pb-8">
               <CardTitle className="flex items-center justify-center gap-3 text-2xl">
-                {currentStep === 2 && <><Building2 className="w-7 h-7 text-primary" /> Dados da Empresa</>}
-                {currentStep === 3 && <><MapPin className="w-7 h-7 text-primary" /> Localização da Loja</>}
-                {currentStep === 4 && <><Store className="w-7 h-7 text-primary" /> Informações do Estabelecimento</>}
-                {currentStep === 5 && <><Settings className="w-7 h-7 text-primary" /> Configurações Finais</>}
+                {currentStep === 1 && <><Building2 className="w-7 h-7 text-primary" /> Dados da Empresa</>}
+                {currentStep === 2 && <><MapPin className="w-7 h-7 text-primary" /> Localização da Loja</>}
+                {currentStep === 3 && <><Store className="w-7 h-7 text-primary" /> Informações do Estabelecimento</>}
+                {currentStep === 4 && <><Settings className="w-7 h-7 text-primary" /> Configurações Finais</>}
               </CardTitle>
               <CardDescription className="text-lg">
-                {currentStep === 2 && "Informações legais da sua empresa"}
-                {currentStep === 3 && "Onde sua loja está localizada"}
-                {currentStep === 4 && "Como sua loja será apresentada"}
-                {currentStep === 5 && "Últimos detalhes para finalizar"}
+                {currentStep === 1 && "Informações legais da sua empresa"}
+                {currentStep === 2 && "Onde sua loja está localizada"}
+                {currentStep === 3 && "Como sua loja será apresentada"}
+                {currentStep === 4 && "Últimos detalhes para finalizar"}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-8 px-8 pb-8">
-                {currentStep === 2 && (
+                {currentStep === 1 && (
                   <motion.div 
                     className="space-y-6"
                     initial={{ opacity: 0, x: -20 }}
@@ -202,8 +198,7 @@ export function StoreRegisterForm() {
                   </motion.div>
                 )}
 
-                {currentStep === 3 && (
-                  // Passo 3: Localização da Loja
+                {currentStep === 2 && (
                   <>
                     <div className="space-y-2">
                       <Label htmlFor="zipCode">CEP</Label>
@@ -297,8 +292,7 @@ export function StoreRegisterForm() {
                   </>
                 )}
 
-                {currentStep === 4 && (
-                  // Passo 4: Informações do Estabelecimento
+                {currentStep === 3 && (
                   <>
                     <div className="space-y-2">
                       <Label htmlFor="storeName">Nome do Estabelecimento</Label>
@@ -370,8 +364,7 @@ export function StoreRegisterForm() {
                   </>
                 )}
 
-                {currentStep === 5 && (
-                  // Passo 5: Configurações Finais
+                {currentStep === 4 && (
                   <>
                     <div className="space-y-2">
                       <Label htmlFor="workingHours">Horário de Funcionamento</Label>

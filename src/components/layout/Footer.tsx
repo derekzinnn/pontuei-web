@@ -2,15 +2,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
-import { AnimatedSection } from "@/components/ui/AnimatedSection"; // 1. Importe o componente de animação
+import { AnimatedSection } from "@/components/ui/AnimatedSection"; 
 
 export function Footer() {
   return (
-    // 2. Envolva toda a seção do footer com o AnimatedSection
     <AnimatedSection>
       <footer className="bg-card border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Newsletter Section */}
           <div className="py-16 text-center border-b border-border">
             <h3 className="text-2xl font-bold text-foreground mb-4">
               Fique por dentro das novidades
@@ -30,9 +28,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Main Footer Content */}
           <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Company Info */}
             <div className="space-y-4">
               <h2 className="text-2xl font-bold text-primary">PONTUEI</h2>
               <p className="text-muted-foreground">
@@ -52,7 +48,6 @@ export function Footer() {
               </div>
             </div>
 
-            {/* Links */}
             <div>
               <h4 className="font-semibold text-foreground mb-4">Links Úteis</h4>
               <ul className="space-y-2">
@@ -79,7 +74,6 @@ export function Footer() {
               </ul>
             </div>
 
-            {/* Legal */}
             <div>
               <h4 className="font-semibold text-foreground mb-4">Legal</h4>
               <ul className="space-y-2">
@@ -96,7 +90,6 @@ export function Footer() {
               </ul>
             </div>
 
-            {/* Contact */}
             <div>
               <h4 className="font-semibold text-foreground mb-4">Contato</h4>
               <div className="space-y-3">
@@ -118,7 +111,6 @@ export function Footer() {
 
           <Separator />
 
-          {/* Bottom Footer */}
           <div className="py-8 flex flex-col sm:flex-row justify-between items-center">
             <p className="text-muted-foreground text-sm">
               © 2025 Pontuei. Todos os direitos reservados.

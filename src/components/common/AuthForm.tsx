@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface AuthFormProps {
   onLogin?: (email: string, password: string) => void;
@@ -18,14 +18,12 @@ export function AuthForm({ onLogin, onRegister }: AuthFormProps) {
 
   const handleLogin = () => {
     onLogin?.(email, password);
-    // Simula login bem-sucedido e redireciona
-    navigate('/store-dashboard');
+    navigate('/store/complete-setup');
   };
 
   const handleRegister = () => {
     onRegister?.(name, email, password);
-    // Simula cadastro bem-sucedido e redireciona
-    navigate('/store-dashboard');
+    navigate('/store/complete-setup');
   };
 
   return (

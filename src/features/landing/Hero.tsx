@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { LandingNavigation } from "@/components/landing/LandingNavigation";
+import { Highlight } from "@/components/ui/hero-highlight";
 
 export function Hero() {
   const containerVariants = {
@@ -20,7 +21,6 @@ export function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen bg-gradient-to-br from-pink-light via-background to-pink-light overflow-hidden">
-      {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 
           className="absolute top-20 -left-20 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-primary/30 via-pink-glow/20 to-transparent blur-3xl animate-float"
@@ -73,6 +73,26 @@ export function Hero() {
       </div>
 
       <LandingNavigation />
+      
+      <style>{`
+        @keyframes shine {
+          0% {
+            background-position: -200% 0;
+          }
+          100% {
+            background-position: 200% 0;
+          }
+        }
+        
+        .animate-shine {
+          animation: shine 4s ease-in-out infinite;
+          background: linear-gradient(90deg, transparent 0%, transparent 30%, rgba(255,255,255,0.8) 50%, transparent 70%, transparent 100%), linear-gradient(90deg, #E94057, #E94057);
+          background-size: 200% 100%, 100% 100%;
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+        }
+      `}</style>
 
       <div className="relative z-10 flex items-center justify-center min-h-screen px-6 pt-20">
         <div className="max-w-6xl mx-auto text-center">
@@ -83,15 +103,31 @@ export function Hero() {
           animate="visible"
         >
           <motion.div variants={itemVariants}>
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground leading-tight tracking-tighter">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E94057] to-white-500 bg-200% animate-gradient">
-            Pontuei.
-              </span> Seu novo{" "}
-              <span className="text-primary">
-                aplicativo <br/>de pontos
-              </span>{" "}
-              chegou.
-            </h1>
+            <motion.h1 
+              className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground leading-tight tracking-tighter"
+              initial={{
+                opacity: 0,
+                y: 20,
+              }}
+              animate={{
+                opacity: 1,
+                y: [20, -5, 0],
+              }}
+              transition={{
+                duration: 0.5,
+                ease: [0.4, 0.0, 0.2, 1],
+              }}
+            >
+              <span className="relative inline-block">
+                <span className="animate-shine">
+                  Pontuei.
+                </span>
+              </span> 
+              {" "}Seu novo{" "}<br/>
+              <Highlight>
+                aplicativo de pontos
+              </Highlight>
+            </motion.h1>
             
             <p className="max-w-3xl mx-auto text-lg sm:text-xl text-muted-foreground leading-relaxed mt-6">
               Compre, pontue e retire de um jeito que você nunca viu. 

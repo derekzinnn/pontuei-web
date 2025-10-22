@@ -34,8 +34,11 @@ export function StoreSidebar() {
 
   // Filtra os itens do menu baseado no status do cadastro
   const filteredMenuItems = isRegistrationComplete 
-    ? menuItems.filter(item => item.title !== "CONCLUIR CADASTRO")
+    ? menuItems.filter(item => item.title !== "Concluir Cadastro")
     : menuItems;
+    
+  // Itens permitidos quando o cadastro não está completo
+  const allowedWhenIncomplete = ["Dashboard", "Concluir Cadastro"];
   
   return (
     <motion.div 
@@ -67,15 +70,22 @@ export function StoreSidebar() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
             >
-              <Link
-                to={item.route}
-                className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all hover:bg-primary/10 ${
-                  location.pathname === item.route ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                <item.icon className="w-5 h-5" />
-                <span className="text-sm font-medium">{item.title}</span>
-              </Link>
+              {!isRegistrationComplete && !allowedWhenIncomplete.includes(item.title) ? (
+                <div className={`flex items-center gap-3 px-3 py-2 rounded-lg opacity-50 cursor-not-allowed text-muted-foreground`}>
+                  <item.icon className="w-5 h-5" />
+                  <span className="text-sm font-medium">{item.title}</span>
+                </div>
+              ) : (
+                <Link
+                  to={item.route}
+                  className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all hover:bg-primary/10 ${
+                    location.pathname === item.route ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  <item.icon className="w-5 h-5" />
+                  <span className="text-sm font-medium">{item.title}</span>
+                </Link>
+              )}
             </motion.div>
           ))}
         </nav>
