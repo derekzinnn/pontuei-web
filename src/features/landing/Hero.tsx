@@ -20,21 +20,10 @@ export function Hero() {
   };
 
   return (
-    <section id="home" className="relative min-h-screen bg-gradient-to-br from-pink-light via-background to-pink-light overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div 
-          className="absolute top-20 -left-20 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-primary/30 via-pink-glow/20 to-transparent blur-3xl animate-float"
-        />
-        <motion.div 
-          className="absolute top-40 right-0 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-pink-glow/25 via-primary/20 to-transparent blur-3xl animate-float-slow"
-        />
-        <motion.div 
-          className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-gradient-to-br from-primary/20 via-pink-light/30 to-transparent blur-3xl animate-pulse-glow"
-        />
+    <section id="home" className="relative min-h-screen bg-background overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
         
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px]">
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/30 via-pink-glow/30 to-primary/30 blur-3xl animate-rotate-gradient" />
-        </div>
+
 
         <div className="absolute inset-0 opacity-[0.04]">
           <div 
@@ -86,7 +75,7 @@ export function Hero() {
         
         .animate-shine {
           animation: shine 4s ease-in-out infinite;
-          background: linear-gradient(90deg, transparent 0%, transparent 30%, rgba(255,255,255,0.8) 50%, transparent 70%, transparent 100%), linear-gradient(90deg, #E94057, #E94057);
+          background: linear-gradient(90deg, transparent 0%, transparent 30%, rgba(255,255,255,0.8) 50%, transparent 70%, transparent 100%), linear-gradient(90deg, #000000, #000000);
           background-size: 200% 100%, 100% 100%;
           -webkit-background-clip: text;
           background-clip: text;
@@ -94,7 +83,7 @@ export function Hero() {
         }
       `}</style>
 
-      <div className="relative z-10 flex items-center justify-center min-h-screen px-6 pt-20">
+      <div className="relative z-20 flex items-center justify-center min-h-screen px-6 pt-20">
         <div className="max-w-6xl mx-auto text-center">
         <motion.div
           className="text-center space-y-6"
@@ -118,7 +107,7 @@ export function Hero() {
                 ease: [0.4, 0.0, 0.2, 1],
               }}
             >
-              <span className="relative inline-block">
+              <span className="relative inline-block pb-2">
                 <span className="animate-shine">
                   Pontuei.
                 </span>
@@ -129,7 +118,7 @@ export function Hero() {
               </Highlight>
             </motion.h1>
             
-            <p className="max-w-3xl mx-auto text-lg sm:text-xl text-muted-foreground leading-relaxed mt-6">
+            <p className="max-w-3xl mx-auto text-lg sm:text-xl text-muted-foreground leading-relaxed mt-6 pt-4">
               Compre, pontue e retire de um jeito que você nunca viu. 
               O Pontuei conecta você com o melhor das lojas da sua cidade, 
               transformando cada compra em um novo ponto de partida para economizar.

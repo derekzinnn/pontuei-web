@@ -48,12 +48,7 @@ const testimonials = [
 
 export function TestimonialsCarousel() {
   return (
-    <section className="relative py-24 bg-gradient-to-br from-background via-secondary/20 to-background overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-10 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-10 right-10 w-96 h-96 bg-pink-glow/10 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-primary/5 via-transparent to-pink-glow/5 rounded-full blur-3xl animate-rotate-gradient" />
-      </div>
+    <section className="py-24 bg-background overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 tracking-tighter">

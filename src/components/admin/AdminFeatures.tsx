@@ -55,10 +55,8 @@ export function AdminFeatures() {
     offset: ["start center", "end center"]
   });
 
-  // Caminho SVG completo e estático
   const pathData = `M 22 25 C 40 15, 50 35, 65 28 C 45 45, 15 55, 26 65 C 50 70, 85 50, 72 62 C 55 80, 25 90, 32 98 C 50 105, 75 85, 68 95`;
   
-  // Conectar scroll à animação da linha
   const pathLength = useTransform(scrollYProgress, [0.1, 0.9], [0, 1]);
 
   useEffect(() => {
@@ -91,7 +89,6 @@ export function AdminFeatures() {
           </motion.div>
 
           <div className="relative w-full h-96">
-            {/* Linha Fluida Animada */}
             <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 z-0">
               <defs>
                 <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -138,7 +135,6 @@ export function AdminFeatures() {
                   }}
                 >
                   <div className="bg-card/80 backdrop-blur-md rounded-2xl p-5 border border-border/30 hover:border-primary/50 transition-all duration-200 hover:scale-105 w-56 h-40 shadow-lg relative">
-                    {/* Connection Point */}
                     {isVisible && <div className="absolute w-3 h-3 bg-primary rounded-full -right-1 top-1/2 -translate-y-1/2 border-2 border-white shadow-lg" />}
                     <div className="w-10 h-10 rounded-xl bg-gradient-primary flex items-center justify-center mb-3 group-hover:rotate-12 transition-transform duration-200">
                       <IconComponent className="w-5 h-5 text-white" />
@@ -151,7 +147,6 @@ export function AdminFeatures() {
             })}
           </div>
 
-          {/* Minimal Progress */}
           <div className="flex justify-center mt-16 gap-1">
             {features.map((_, index) => (
               <motion.div

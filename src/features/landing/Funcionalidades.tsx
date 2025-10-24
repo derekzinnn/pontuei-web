@@ -5,7 +5,7 @@ import { useLandingData } from "@/hooks/useLandingData";
 export const Features = () => {
   const { features } = useLandingData();
   return (
-    <section id="funcionalidades" className="py-24 bg-secondary/50">
+    <section id="funcionalidades" className="py-24 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection>
           <div className="text-center mb-16 max-w-3xl mx-auto">
