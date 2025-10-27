@@ -2,7 +2,7 @@ import * as React from "react";
 import type { ToastActionElement, ToastProps } from "@/components/ui/toast";
 
 const TOAST_LIMIT = 1;
-const TOAST_REMOVE_DELAY = 1000 * 60 * 60 * 24; // 24 hours - a long time
+const TOAST_REMOVE_DELAY = 1000 * 60 * 60 * 24;
 
 type ToasterToast = ToastProps & {
   id: string;
@@ -51,8 +51,6 @@ interface State {
 
 const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
 
-// This function schedules the final removal of the toast from the state
-// after its exit animation is complete.
 const addToRemoveQueue = (toastId: string) => {
   if (toastTimeouts.has(toastId)) {
     return;
@@ -69,8 +67,6 @@ const addToRemoveQueue = (toastId: string) => {
   toastTimeouts.set(toastId, timeout);
 };
 
-// --- REDUCER ---
-// Manages how the toast state changes in response to actions.
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "ADD_TOAST":
@@ -90,13 +86,10 @@ export const reducer = (state: State, action: Action): State => {
     case "DISMISS_TOAST": {
       const { toastId } = action;
 
-      // If a specific toastId is provided, dismiss that one.
-      // Otherwise, dismiss all toasts.
-      return {
+         return {
         ...state,
         toasts: state.toasts.map((t) => {
           if (t.id === toastId || toastId === undefined) {
-            // Schedule the toast for removal after the animation
             addToRemoveQueue(t.id);
             return {
               ...t,
@@ -125,10 +118,6 @@ export const reducer = (state: State, action: Action): State => {
   }
 };
 
-// --- STATE MANAGEMENT ---
-// This part allows us to call toast() from anywhere in the app
-// without needing a React Context Provider.
-
 let listeners: Array<(state: State) => void> = [];
 
 let memoryState: State = { toasts: [] };
@@ -139,9 +128,6 @@ function dispatch(action: Action) {
     listener(memoryState);
   });
 }
-
-// --- PUBLIC API ---
-// These are the functions you'll use in your components.
 
 type Toast = Omit<ToasterToast, "id">;
 
@@ -175,8 +161,6 @@ function toast(props: Toast) {
   };
 }
 
-// --- HOOK ---
-// The hook that components will use to get the current list of toasts.
 function useToast() {
   const [state, setState] = React.useState<State>(memoryState);
 

@@ -94,7 +94,6 @@ export default function StoreOrdersPage() {
             <p className="text-muted-foreground">Gerencie todos os pedidos da sua loja</p>
           </div>
 
-          {/* Resumo de Pedidos */}
           <div className="grid md:grid-cols-4 gap-6">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -147,7 +146,6 @@ export default function StoreOrdersPage() {
             </Card>
           </div>
 
-          {/* Filtros */}
           <Card>
             <CardHeader>
               <CardTitle>Filtrar Pedidos</CardTitle>
@@ -170,7 +168,6 @@ export default function StoreOrdersPage() {
             </CardContent>
           </Card>
 
-          {/* Lista de Pedidos */}
           <Card>
             <CardHeader>
               <CardTitle>Pedidos do Dia</CardTitle>

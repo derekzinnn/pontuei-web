@@ -18,7 +18,6 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-light via-background to-pink-light overflow-hidden relative flex items-center justify-center p-4">
-      {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 -left-20 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-primary/30 via-pink-glow/20 to-transparent blur-3xl animate-float" />
         <div className="absolute top-40 right-0 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-pink-glow/25 via-primary/20 to-transparent blur-3xl animate-float-slow" />

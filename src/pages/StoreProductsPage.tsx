@@ -57,7 +57,6 @@ export default function StoreProductsPage() {
             </Button>
           </div>
 
-          {/* Formulário Adicionar Produto */}
           {showAddForm && (
             <Card>
               <CardHeader>
@@ -123,8 +122,7 @@ export default function StoreProductsPage() {
             </Card>
           )}
 
-          {/* Lista de Produtos */}
-          <Card>
+S          <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Package className="w-5 h-5" />

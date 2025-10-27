@@ -45,13 +45,10 @@ export default function StoreCompleteSetupPage() {
   const allCompleted = completedSteps === totalSteps;
 
   const handleCompleteSetup = () => {
-    // Marca todos os passos como completos
     setSteps(steps.map(step => ({ ...step, completed: true })));
     
-    // Salva no localStorage que o cadastro foi finalizado
     localStorage.setItem('storeRegistrationComplete', 'true');
     
-    // Redireciona para dashboard
     window.location.href = '/store-dashboard';
   };
 
@@ -68,7 +65,6 @@ export default function StoreCompleteSetupPage() {
         <p className="text-muted-foreground">Complete todos os passos para ativar sua loja</p>
       </div>
 
-      {/* Progress Overview */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -92,7 +88,6 @@ export default function StoreCompleteSetupPage() {
         </CardContent>
       </Card>
 
-      {/* Setup Steps */}
       <div className="space-y-4">
         {steps.map((step) => (
           <Card key={step.id} className={`transition-all ${step.completed ? 'bg-green-50 border-green-200' : ''}`}>
@@ -138,7 +133,6 @@ export default function StoreCompleteSetupPage() {
         ))}
       </div>
 
-      {/* Complete Setup Button */}
       {allCompleted && (
         <Card className="bg-green-50 border-green-200">
           <CardContent className="p-6 text-center">
@@ -155,7 +149,6 @@ export default function StoreCompleteSetupPage() {
         </Card>
       )}
 
-      {/* Instructions */}
       <Card>
         <CardHeader>
           <CardTitle>Como funciona?</CardTitle>

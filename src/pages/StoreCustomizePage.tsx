@@ -32,7 +32,6 @@ export default function StoreCustomizePage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {/* Banner e Imagens */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -62,7 +61,6 @@ export default function StoreCustomizePage() {
               </CardContent>
             </Card>
 
-            {/* Cores do Tema */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -123,7 +121,6 @@ export default function StoreCustomizePage() {
             </Card>
           </div>
 
-          {/* Informações da Loja */}
           <Card>
             <CardHeader>
               <CardTitle>Informações da Loja</CardTitle>
@@ -151,7 +148,6 @@ export default function StoreCustomizePage() {
             </CardContent>
           </Card>
 
-          {/* Botão Salvar */}
           <div className="flex justify-end">
             <Button onClick={handleSave} className="flex items-center gap-2">
               <Save className="w-4 h-4" />

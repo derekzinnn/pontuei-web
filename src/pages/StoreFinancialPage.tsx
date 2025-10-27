@@ -54,7 +54,6 @@ export default function StoreFinancialPage() {
             </div>
           </div>
 
-          {/* Cards de Resumo */}
           <div className="grid md:grid-cols-4 gap-6">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -115,7 +114,6 @@ export default function StoreFinancialPage() {
             </Card>
           </div>
 
-          {/* Filtros de Período */}
           <Card>
             <CardHeader>
               <CardTitle>Período de Análise</CardTitle>
@@ -138,7 +136,6 @@ export default function StoreFinancialPage() {
             </CardContent>
           </Card>
 
-          {/* Extrato de Transações */}
           <Card>
             <CardHeader>
               <CardTitle>Extrato de Transações</CardTitle>

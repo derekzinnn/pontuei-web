@@ -72,7 +72,6 @@ export default function StoreMembersPage() {
             </Button>
           </div>
 
-          {/* Níveis de Acesso */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -97,7 +96,6 @@ export default function StoreMembersPage() {
             </CardContent>
           </Card>
 
-          {/* Formulário Adicionar Membro */}
           {showAddForm && (
             <Card>
               <CardHeader>
@@ -147,7 +145,6 @@ export default function StoreMembersPage() {
             </Card>
           )}
 
-          {/* Lista de Membros */}
           <Card>
             <CardHeader>
               <CardTitle>Membros da Equipe</CardTitle>
