@@ -118,7 +118,7 @@ export function Hero() {
               </Highlight>
             </motion.h1>
             
-            <p className="max-w-3xl mx-auto text-lg sm:text-xl text-muted-foreground leading-relaxed mt-6 pt-4">
+            <p className="max-w-3xl mx-auto text-lg sm:text-xl text-muted-foreground leading-relaxed mt-10 pt-4">
               Compre, pontue e retire de um jeito que você nunca viu. 
               O Pontuei conecta você com o melhor das lojas da sua cidade, 
               transformando cada compra em um novo ponto de partida para economizar.

@@ -95,15 +95,15 @@ export function Footer() {
               <div className="space-y-3">
                 <div className="flex items-center space-x-3 text-muted-foreground">
                   <Mail className="w-4 h-4 text-primary" />
-                  <span className="text-sm">contato@pontuei.com</span>
+                  <span className="text-sm">pontuei.co@gmail.com</span>
                 </div>
                 <div className="flex items-center space-x-3 text-muted-foreground">
                   <Phone className="w-4 h-4 text-primary" />
-                  <span className="text-sm">(11) 99999-9999</span>
+                  <span className="text-sm">(53) 99135-4724</span>
                 </div>
                 <div className="flex items-center space-x-3 text-muted-foreground">
                   <MapPin className="w-4 h-4 text-primary" />
-                  <span className="text-sm">São Paulo, SP</span>
+                  <span className="text-sm">Pelotas, RS</span>
                 </div>
               </div>
             </div>
