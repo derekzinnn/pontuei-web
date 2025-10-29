@@ -4,16 +4,12 @@ import { AuthForm } from "@/components/common";
 import { Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const [searchParams] = useSearchParams();
   const isStoreRegistration = searchParams.get('store') === 'true';
 
-  const handleLogin = (email: string, password: string) => {
-    console.log('Login:', { email, password });
-  };
-
-  const handleRegister = (name: string, email: string, password: string) => {
-    console.log('Register:', { name, email, password });
+  const handleRegister = (name: string, email: string, cpf: string, birthDate: string, password: string) => {
+    console.log('Register:', { name, email, cpf, birthDate, password });
   };
 
   return (
@@ -53,19 +49,19 @@ const LoginPage = () => {
                 </span>
               ) : (
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-pink-glow">
-                  Bem-vindo
+                  Criar Conta
                 </span>
               )}
             </CardTitle>
             <CardDescription className="text-center text-base">
               {isStoreRegistration 
-                ? "Primeiro, faça login ou crie sua conta para acessar o Pontuei Business"
-                : "Acesse sua conta para gerenciar seus pontos"
+                ? "Primeiro, crie sua conta para acessar o Pontuei Business"
+                : "Preencha os dados para criar sua conta"
               }
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <AuthForm mode="login" onLogin={handleLogin} />
+            <AuthForm mode="register" onRegister={handleRegister} />
             <p className="text-xs text-center text-muted-foreground mt-4">
               Ao criar uma conta, você concorda com nossos{" "}
               <Link to="#" className="underline hover:text-primary">
@@ -74,12 +70,9 @@ const LoginPage = () => {
             </p>
           </CardContent>
         </Card>
-
-
       </div>
     </div>
   );
 };
 
-export default LoginPage;
-
+export default RegisterPage;
