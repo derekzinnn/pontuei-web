@@ -67,9 +67,17 @@ export function AuthForm({ mode, onLogin, onRegister }: AuthFormProps) {
             className="h-12 text-base"
           />
         </div>
-        <Link to="#" className="text-sm text-muted-foreground hover:text-primary text-right block">
-              Esqueceu sua senha?
-            </Link>
+        <div className="flex justify-between items-center">
+          <div className="flex items-center space-x-2">
+            <input type="checkbox" id="keepConnected" className="w-4 h-4 text-primary" />
+            <label htmlFor="keepConnected" className="text-sm text-muted-foreground">
+              Manter conectado
+            </label>
+          </div>
+          <Link to="#" className="text-sm text-muted-foreground hover:text-primary">
+            Esqueceu sua senha?
+          </Link>
+        </div>
         <Button className="w-full h-12 text-base shadow-glow hover:shadow-primary/50" onClick={handleLogin}>
           Entrar
         </Button>
