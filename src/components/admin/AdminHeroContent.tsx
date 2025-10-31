@@ -8,15 +8,13 @@ interface AdminHeroContentProps {
 
 export function AdminHeroContent({ onGetStarted }: AdminHeroContentProps) {
   return (
-    <main className="relative z-10 px-6 pt-48 pb-32">
+    <main className="relative z-10 px-6 pt-48 pb-32 mt-20">
       <motion.div 
         className="max-w-6xl mx-auto text-center"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8 }}
       >
-
-
         <div className="space-y-6 mb-8">
           <motion.h1 
             className="text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tight"

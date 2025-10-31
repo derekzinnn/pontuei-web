@@ -17,7 +17,7 @@ export function AdminCTA() {
         <div className="absolute bottom-20 right-20 w-80 h-80 bg-pink-glow/10 rounded-full blur-3xl animate-pulse delay-1000" />
       </div>
 
-      <div className="relative max-w-4xl mx-auto px-6 text-center">
+      <div className="relative max-w-4xl mx-auto px-6 text-center w-full flex flex-col items-center">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -61,8 +61,7 @@ export function AdminCTA() {
             </Button>
             </a>
           </motion.div>
-
-          <p className="text-sm text-muted-foreground mt-6">
+          <p className="text-sm text-muted-foreground mt-10">
             ✨ Sem compromisso • Configuração gratuita • Suporte incluído
           </p>
         </motion.div>

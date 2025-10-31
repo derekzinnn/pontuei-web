@@ -68,11 +68,10 @@ export function AdminFeatures() {
   }, [scrollYProgress]);
 
   return (
-    <section className="relative py-20 bg-gradient-to-br from-secondary/10 to-background">
-      <div ref={containerRef} style={{ height: '300vh' }} className="relative">
-        <div className="sticky top-0 h-screen flex items-center justify-center">
-
-
+    <section className="relative bg-gradient-to-br from-secondary/10 to-background">
+      <div ref={containerRef} style={{ height: '400vh' }} className="relative">
+        <div className="sticky top-0 h-screen flex items-center justify-center py-40">
+ 
           <div className="w-full h-full px-6 relative z-10">
           <motion.div 
             className="text-center mb-8"
@@ -101,7 +100,7 @@ export function AdminFeatures() {
               <motion.path
                 d={pathData}
                 stroke="#E94057"
-                strokeWidth="2"
+                strokeWidth="1"
                 fill="none"
                 strokeLinecap="round"
                 initial={{ pathLength: 0 }}
@@ -135,7 +134,7 @@ export function AdminFeatures() {
                   }}
                 >
                   <div className="bg-card/80 backdrop-blur-md rounded-2xl p-5 border border-border/30 hover:border-primary/50 transition-all duration-200 hover:scale-105 w-56 h-40 shadow-lg relative">
-                    {isVisible && <div className="absolute w-3 h-3 bg-primary rounded-full -right-1 top-1/2 -translate-y-1/2 border-2 border-white shadow-lg" />}
+                    {isVisible && <div/>}
                     <div className="w-10 h-10 rounded-xl bg-gradient-primary flex items-center justify-center mb-3 group-hover:rotate-12 transition-transform duration-200">
                       <IconComponent className="w-5 h-5 text-white" />
                     </div>
