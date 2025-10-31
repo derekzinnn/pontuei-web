@@ -10,11 +10,7 @@ const navLinks = [
   { href: "#funcionalidades", label: "Funcionalidades" },
 ];
 
-interface LandingNavigationProps {
-  onLoginClick?: () => void;
-}
-
-export function LandingNavigation({ onLoginClick }: LandingNavigationProps) {
+export function LandingNavigation() {
   const [activeLink, setActiveLink] = useState("home");
 
   useEffect(() => {
@@ -86,20 +82,9 @@ export function LandingNavigation({ onLoginClick }: LandingNavigationProps) {
           
           <div className="flex items-center gap-4">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link to="/login">
-                <Button 
-                  variant="ghost" 
-                  className="text-foreground hover:text-primary transition-all hover:bg-primary/10"
-                  onClick={onLoginClick}
-                >
-                  Login
-                </Button>
-              </Link>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link to="/admin-store">
                 <Button className="hover:opacity-90 transition-all shadow-2xl hover:shadow-primary/50 animate-glow-pulse">
-                  Associe-se
+                  Área Loja
                 </Button>
               </Link>
             </motion.div>

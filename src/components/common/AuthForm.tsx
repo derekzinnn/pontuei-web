@@ -48,7 +48,7 @@ export function AuthForm({ mode, onLogin, onRegister }: AuthFormProps) {
           <Input
             id="email"
             type="email"
-            placeholder="seu@email.com ou usuário"
+            placeholder="Usuário ou e-mail"
             value={formData.email}
             onChange={(e) => handleInputChange('email', e.target.value)}
             className="h-12 text-base"

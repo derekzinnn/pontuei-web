@@ -31,7 +31,7 @@ export function AdminHeroContent({ onGetStarted }: AdminHeroContentProps) {
           </motion.h1>
 
           <motion.p 
-            className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed"
+            className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed pt-10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -42,7 +42,7 @@ export function AdminHeroContent({ onGetStarted }: AdminHeroContentProps) {
         </div>
 
         <motion.div 
-          className="flex flex-col sm:flex-row items-center justify-center gap-6"
+          className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -55,16 +55,6 @@ export function AdminHeroContent({ onGetStarted }: AdminHeroContentProps) {
             >
               Começar Agora
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </motion.div>
-          
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="text-lg px-8 py-4 backdrop-blur-xl bg-white/20 border-white/30 hover:bg-white/30"
-            >
-              Ver Demonstração
             </Button>
           </motion.div>
         </motion.div>

@@ -12,10 +12,6 @@ const LoginPage = () => {
     console.log('Login:', { email, password });
   };
 
-  const handleRegister = (name: string, email: string, password: string) => {
-    console.log('Register:', { name, email, password });
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-light via-background to-pink-light overflow-hidden relative flex items-center justify-center p-4">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -49,7 +45,7 @@ const LoginPage = () => {
             <CardTitle className="text-3xl text-center font-bold">
               {isStoreRegistration ? (
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-pink-glow">
-                  Cadastro de Loja
+                  Cadastro de Conta
                 </span>
               ) : (
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-pink-glow">
