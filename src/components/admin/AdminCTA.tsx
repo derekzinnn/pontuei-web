@@ -11,7 +11,7 @@ const benefits = [
 
 export function AdminCTA() {
   return (
-    <section className="relative py-24 bg-gradient-to-br from-primary/5 via-background to-pink-glow/5 overflow-hidden">
+    <section id="admincta" className="relative py-24 bg-gradient-to-br from-primary/5 via-background to-pink-glow/5 overflow-hidden">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-20 w-80 h-80 bg-pink-glow/10 rounded-full blur-3xl animate-pulse delay-1000" />

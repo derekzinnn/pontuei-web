@@ -48,6 +48,14 @@ const features = [
 ];
 
 export function AdminFeatures() {
+  return (
+    <section id="adminfeatures" className="relative bg-gradient-to-br from-secondary/10 to-background">
+      <AdminFeaturesContent />
+    </section>
+  );
+}
+
+function AdminFeaturesContent() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [visibleCards, setVisibleCards] = useState(1);
   const { scrollYProgress } = useScroll({
@@ -68,9 +76,8 @@ export function AdminFeatures() {
   }, [scrollYProgress]);
 
   return (
-    <section className="relative bg-gradient-to-br from-secondary/10 to-background">
-      <div ref={containerRef} style={{ height: '400vh' }} className="relative">
-        <div className="sticky top-0 h-screen flex items-center justify-center py-40">
+    <div ref={containerRef} style={{ height: '400vh' }} className="relative">
+        <div className="sticky top-0 h-screen flex items-center justify-center py-30">
  
           <div className="w-full h-full px-6 relative z-10">
           <motion.div 
@@ -146,7 +153,7 @@ export function AdminFeatures() {
             })}
           </div>
 
-          <div className="flex justify-center mt-16 gap-1">
+          <div className="flex justify-center mt-16 gap-1 pb-32">
             {features.map((_, index) => (
               <motion.div
                 key={index}
@@ -159,7 +166,6 @@ export function AdminFeatures() {
           </div>
           </div>
         </div>
-      </div>
-    </section>
+    </div>
   );
 }

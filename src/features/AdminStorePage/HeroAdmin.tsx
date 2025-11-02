@@ -18,7 +18,7 @@ export const Hero = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-background overflow-hidden">
+    <div id="home" className="relative min-h-screen bg-background overflow-hidden">
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
         <div className="absolute inset-0 opacity-[0.04]">
           <div 
